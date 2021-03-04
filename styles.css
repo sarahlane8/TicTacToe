@@ -90,3 +90,13 @@ main {
   border-left: 5px solid navy;
   border-right: 5px solid navy;
 }
+.reset-button {
+  background-color: navy;
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
+  font-family: sans-serif;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 60px;
+}
