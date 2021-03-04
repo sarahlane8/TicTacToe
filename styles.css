@@ -1,1 +1,92 @@
 
+body {
+  background: linear-gradient(pink, purple, navy);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  font-family: sans-serif
+  color: navy;
+  margin: 0;
+  padding: 0;
+}
+
+
+h3,
+h4 {
+font-size: 80px;
+margin: 0;
+color: navy;
+}
+
+
+h5 {
+  color: navy;
+  margin-top: 30px;
+}
+
+
+main {
+  background: white;
+}
+
+
+.left-side,
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 25%;
+}
+
+
+.game-section {
+    width: 50%;
+    height: 100vh;
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.game-board {
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.box {
+  box-sizing: border-box;
+  display: flex;
+  height: 175px;
+  width: 175px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#box0,
+#box1,
+#box2 {
+  border-bottom: 5px solid navy;
+}
+
+
+#box6,
+#box7,
+#box8 {
+  border-top: 5px solid navy;
+}
+
+
+#box1,
+#box4,
+#box7 {
+  border-left: 5px solid navy;
+  border-right: 5px solid navy;
+}
