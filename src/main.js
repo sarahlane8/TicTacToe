@@ -4,7 +4,10 @@
 //
 // it will initiate 2 player instances
 
-var resetButton = document.querySelector('.reset-btn');
+var resetButton = document.getElementById('resetBtn');
+var starWins = document.getElementById('starWins');
+var heartWins = document.getElementById('heartWins');
+
 
 resetButton.addEventListener('click', resetGames);
 
@@ -14,5 +17,22 @@ resetButton.addEventListener('click', resetGames);
 function resetGames() {
   //turns board empty
   //deletes all wins from local storage
-  console.log("it works!");
+}
+
+
+function displayPlayerWins(player, number) {
+  if (player === player1) {
+    if (number === 1) {
+      starWins.innerText = '1 win';
+    } else {
+      starWins.innerText = `${number} wins`;
+    }
+    if (player === player2) {
+      if (number === 1) {
+        heartWins.innerText = '1 win';
+      } else {
+        heartWins.innerText = `${number} wins`;
+      }
+    }
+  }
 }
