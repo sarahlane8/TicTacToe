@@ -1,1 +1,58 @@
 
+body {
+  background: linear-gradient(pink, purple, navy);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  font-family: sans-serif
+  color: navy;
+}
+h3, h4 {
+font-size: 80px;
+margin: 0;
+color: navy;
+}
+
+h5 {
+  color: navy;
+}
+
+
+main {
+  background: white;
+}
+
+.game-board
+
+.left-side,
+.right-side,
+.game-section {
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: center;
+  width: 20%;
+}
+
+.game-section {
+    width: 60%;
+    font-size: 50px;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  align-content: center;
+  /* justify-items: center; */
+  align-items: center;
+  grid-auto-rows: 200px;
+  grid-auto-columns: 200px;
+  border: 6px solid black;
+}
+div {
+  display: flex;
+}
