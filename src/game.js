@@ -4,47 +4,63 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
-    this.cell0 = {
+    this.box0 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell1 = {
+    this.box1 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell2 = {
+    this.box2 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell3 = {
+    this.box3 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell4 = {
+    this.box4 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell5 = {
+    this.box5 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell6 = {
+    this.box6 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell7 = {
+    this.box7 = {
       occupied: false,
       occupiedByPlayer: null
     }
-    this.cell8 = {
+    this.box8 = {
       occupied: false,
       occupiedByPlayer: null
     }
   }
   checkForWinner() {
-
+//iterate through 
   }
+
+  updateCell(boxCell) {
+    this[boxCell].occupied = true;
+    if (this.playerTurn === this.player1) {
+      this[boxCell].occupiedByPlayer = this.player1;
+    } else {
+      this[boxCell].occupiedByPlayer = this.player2;
+    }
+  }
+
 }
+    // console.log(game[boxCell])
+
+
+
+
+
 //compare the game board against any winning solutions
 //if yes, push win to that players array
 //update local storage method
