@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
-    this.boxesOccupiedByPlayer1 = 0;
+    this.boxesOccupiedByPlayer1 = 0;//change this to just boxesOccupied
     this.boxesOccupiedByPlayer2 = 0;
     this.boxes = [
       ({name: 'box0',
@@ -54,50 +54,65 @@ class Game {
     ]
   }
 
+
   updateCell(boxCell) {//change game boxes to "occupied: true" and who it's occupied by
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell) {
         this.boxes[i].occupied = true;
-        (this.playerTurn === this.player1) ?
-        this.boxes[i].occupiedByPlayer = this.player1:
-        this.boxes[i].occupiedByPlayer = this.player2;
+        if (this.playerTurn === this.player1) {
+          this.boxes[i].occupiedByPlayer = this.player1;
+        } else {
+          this.boxes[i].occupiedByPlayer = this.player2;
+        }
       }
-      // && this.boxesOccupiedByPlayer1++:
     }
-    if (this.boxesOccupiedByPlayer1 >= 3) {//
+  }
+
+
+  updatePlayerTurn(playerTurn) {
+    //this.boxesOccupied++;
+    if (playerTurn === this.player1) {
+      this.boxesOccupiedByPlayer1++;
+    } else {
+      this.boxesOccupiedByPlayer2++;
+    }
+    game.countNumberOfCells();
+    if (this.playerTurn === this.player1) {
+      this.playerTurn = this.player2;
+    } else {
+      this.playerTurn = this.player1;
+    }
+  }
+
+
+  countNumberOfCells() {//this is running too many times, !!!!!!!!!
+  //could change it to total number of cells and then differentiate based on that
+    if (this.boxesOccupiedByPlayer1 >= 3) {//saying to go run the check for winner method
+      console.log("line 90");//***********************************
       game.checkForWinner(this.Player1);
     } else if (this.boxesOccupiedByPlayer2 >= 3) {
       game.checkForWinner(this.Player2);
     }
   }
 
-  updatePlayerTurn(playerTurn) {
-    if (playerTurn === this.player1) {
-      this.boxesOccupiedByPlayer1++;
-      // console.log(this.boxesOccupiedByPlayer1);
-    } else {
-      this.boxesOccupiedByPlayer2++;
-      // console.log(this.boxesOccupiedByPlayer2);
-    }
-    (this.playerTurn === this.player1) ?
-    this.playerTurn = this.player2: this.playerTurn = this.player1;
-    }
-  }
-
 
   checkForWinner(player) {
-    var winningArray= [];
+    var winningArray = [];
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].occupiedByPlayer === player) {
+        console.log(this.boxes[i]);
         winningArray.push(this.boxes[i].name);
         console.log(winningArray);
-
       }
 //push game to that array
 //innerText you've won!
-//reset game
-    }
+//reset game method
+
   }
+}
+
+}
+
 
       //iterate through game cells to see if 5 or more to start checking for winning conditions
       // 1. boxes 0,1,2
@@ -122,10 +137,6 @@ class Game {
 //go to a new function to reset board
 
 
-// A way to keep track of the data of the game board
-
-
-//make a method that will pass in a parameter to make that particular cell false or true
 
     // this.box0 = {
     //   occupied: false,

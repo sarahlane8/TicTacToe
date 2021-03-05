@@ -29,7 +29,6 @@ function resetGames() {
 }
 
 
-//I need to target the grid on click, and check what the closest box was that was clicked on
 function targetBoardClick(event) {
   var boxCell = event.target.id;
   game.updateCell(boxCell)
