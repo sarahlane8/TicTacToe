@@ -1,4 +1,5 @@
 
+
 body {
   background: linear-gradient(pink, purple, navy);
   background-repeat: no-repeat;
@@ -73,20 +74,30 @@ main {
 #box0,
 #box1,
 #box2 {
-  border-bottom: 5px solid navy;
+  border-bottom: 8px solid navy;
 }
 
 
 #box6,
 #box7,
 #box8 {
-  border-top: 5px solid navy;
+  border-top: 8px solid navy;
 }
 
 
 #box1,
 #box4,
 #box7 {
-  border-left: 5px solid navy;
-  border-right: 5px solid navy;
+  border-left: 8px solid navy;
+  border-right: 8px solid navy;
+}
+.reset-btn {
+  background-color: navy;
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
+  font-family: sans-serif;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 60px;
 }

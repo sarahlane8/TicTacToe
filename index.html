@@ -4,30 +4,33 @@
     <meta charset="utf-8">
     <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="src/main.js"></script>
   </head>
   <body>
     <aside class="left-side">
       <h4>⭐️</h4>
-      <h3>wins</h3>
+      <h3 id="starWins">0 wins</h3>
     </aside>
     <main class="game-section">
-      <h5>It's your turn!</h5>
-      <section class="game-board">
-        <div class="box" id="box0"> </div>
-        <div class="box" id="box1"> </div>
-        <div class="box" id="box2"> </div>
-        <div class="box" id="box3"> </div>
-        <div class="box" id="box4"> </div>
-        <div class="box" id="box5"> </div>
-        <div class="box" id="box6"> </div>
-        <div class="box" id="box7"> </div>
-        <div class="box" id="box8"> </div>
+      <h5>It's ⭐️'s turn!</h5>
+      <section class="game-board" id="gameBoard">
+        <div class="box box0" id="box0"> </div>
+        <div class="box box1" id="box1"> </div>
+        <div class="box box2" id="box2"> </div>
+        <div class="box box3" id="box3"> </div>
+        <div class="box box4" id="box4"> </div>
+        <div class="box box5" id="box5"> </div>
+        <div class="box box6" id="box6"> </div>
+        <div class="box box7" id="box7"> </div>
+        <div class="box box8" id="box8"> </div>
       </section>
+      <button class="reset-btn" id="resetBtn">Reset</button>
     </main>
     <aside class="right-side">
       <h4>❤️</h4>
-      <h3> wins</h3>
+      <h3 id="heartWins">0 wins</h3>
     </aside>
+    <script src="./src/main.js"></script>
+    <script src="./src/game.js"></script>
+    <script src="./src/player.js"></script>
   </body>
-</html>
+</html> 
