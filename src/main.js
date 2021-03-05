@@ -33,9 +33,8 @@ function resetGames() {
 function targetBoardClick(event) {
   var boxCell = event.target.id;
   game.updateCell(boxCell)
+  game.updatePlayerTurn();
 }
-
-
 
 
   // if (event.target.id === 'box0') {

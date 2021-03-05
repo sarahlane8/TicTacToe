@@ -4,6 +4,7 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
+    this.boxesOccupied = 0;
     this.boxes = [
       ({name: 'box0',
         occupied: false,
@@ -51,33 +52,36 @@ class Game {
       })
     ]
   }
-  checkForWinner() {
-//iterate through game cells to see if 5 or more to start checking for winning conditions
-  }
+
+  updatePlayerTurn() {
+      (this.playerTurn === this.player1) ?
+      this.playerTurn = this.player2: this.playerTurn = this.player1;
+    }
 
   updateCell(boxCell) {
-    // console.log(this.boxes)
-    // console.log(this.boxes[i].name);
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell) {
         this.boxes[i].occupied = true;
-        if (this.playerTurn === this.player1) {
-          this.boxes[i].occupiedByPlayer = this.player1;
-        } else {
-          this.boxes[i].occupiedByPlayer = this.player2;
-        }
+        this.boxesOccupied++;
+        (this.playerTurn === this.player1) ?
+        this.boxes[i].occupiedByPlayer = this.player1:
+        this.boxes[i].occupiedByPlayer = this.player2;
       }
+    }
+    if (this.boxes >= 5) {
+      checkForWinner();
     }
   }
 
-  //   this[boxCell].occupied = true;
-  //   if (this.playerTurn === this.player1) {
-  //     this[boxCell].occupiedByPlayer = this.player1;
-  //   } else {
-  //     this[boxCell].occupiedByPlayer = this.player2;
-}
+  checkForWinner() {
+    console.log('hello!')
+      //iterate through game cells to see if 5 or more to start checking for winning conditions
+    }
 
-    // console.log(game[boxCell])
+  }
+
+
+
 
 
 
