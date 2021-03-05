@@ -7,9 +7,10 @@
 var resetButton = document.getElementById('resetBtn');
 var starWins = document.getElementById('starWins');
 var heartWins = document.getElementById('heartWins');
-
+var gameBoard = document.getElementById('gameBoard');
 
 resetButton.addEventListener('click', resetGames);
+gameBoard.addEventListener('click', targetBoardClick)
 
 // window.addEventListener('load', renderLocalStorageWins);
 
@@ -17,6 +18,13 @@ resetButton.addEventListener('click', resetGames);
 function resetGames() {
   //turns board empty
   //deletes all wins from local storage
+}
+
+
+function targetBoardClick(event) {
+    if (event.target.className === 'box') {
+      console.log("hello!")
+    }
 }
 
 
