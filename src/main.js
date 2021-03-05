@@ -1,6 +1,6 @@
-// on page load, it will say it's star's turn! at the top
+
 // it will initiate a new game instance
-//   whose turn is it
+
 //
 // it will initiate 2 player instances
 
@@ -12,7 +12,15 @@ var gameBoard = document.getElementById('gameBoard');
 resetButton.addEventListener('click', resetGames);
 gameBoard.addEventListener('click', targetBoardClick)
 
-// window.addEventListener('load', renderLocalStorageWins);
+window.addEventListener('load', renderLocalStorageWins);
+
+function renderLocalStorageWins() {
+  // display the wins for each player on the top
+  var game = new Game();
+  console.log(game)
+  //initiate 2 player instances
+}
+
 
 
 function resetGames() {
@@ -20,11 +28,18 @@ function resetGames() {
   //deletes all wins from local storage
 }
 
+// var cardEl = event.target.closest('.saved-cards');
+// var cardId = cardEl && parseInt(cardEl.id);
+// if (event.target.className === 'delete-card-x') {
+//   deleteCard(cardId)
+// }
 
+//I need to target the grid on click, and check what the closest box was that was clicked on
 function targetBoardClick(event) {
-    if (event.target.className === 'box') {
+  // var gameGrid = event.target.closest('.game-board')
+    // if (event.target.className === 'box0') {
       console.log("hello!")
-    }
+    // }
 }
 
 
