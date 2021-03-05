@@ -10,3 +10,7 @@ class Game {
     //go to a new function to reset board
   }
 }
+
+
+// A way to keep track of the data of the game board
+// A way to keep track of which player’s turn it currently is

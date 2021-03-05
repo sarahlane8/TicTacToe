@@ -1,14 +1,9 @@
 
-// it will initiate a new game instance
-
-//
-// it will initiate 2 player instances
-
 var resetButton = document.getElementById('resetBtn');
 var starWins = document.getElementById('starWins');
 var heartWins = document.getElementById('heartWins');
 var gameBoard = document.getElementById('gameBoard');
-
+var box = document.getElementById('box0')//now use event delegation to do this
 resetButton.addEventListener('click', resetGames);
 gameBoard.addEventListener('click', targetBoardClick)
 
@@ -18,6 +13,8 @@ function renderLocalStorageWins() {
   // display the wins for each player on the top
   var game = new Game();
   console.log(game)
+
+// box.innerText = "Heart"
   //initiate 2 player instances
 }
 
@@ -36,9 +33,13 @@ function resetGames() {
 
 //I need to target the grid on click, and check what the closest box was that was clicked on
 function targetBoardClick(event) {
-  // var gameGrid = event.target.closest('.game-board')
+  var boxCell = event.target.closest('.game-board')
+  console.log(boxCell);
     // if (event.target.className === 'box0') {
-      console.log("hello!")
+      // console.log("hello!")
+      if (boxCell === 'box0') {
+     console.log("heart");
+   }
     // }
 }
 
