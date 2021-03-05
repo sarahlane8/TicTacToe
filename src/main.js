@@ -36,7 +36,7 @@ function targetBoardClick(event) {
 }
 
 
-function displayPlayerWins(player, number) {
+function displayPlayerWins(player, number) {//not invoked yet
   if (player === player1) {
     if (number === 1) {
       starWins.innerText = '1 win';

@@ -4,53 +4,52 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
-    this.boxesOccupiedByPlayer1 = 0;//change this to just boxesOccupied
-    this.boxesOccupiedByPlayer2 = 0;
+    this.boxesOccupied = 0;
     this.boxes = [
-      ({name: 'box0',
+      {name: 'box0',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box1',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box2',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box3',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box4',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box5',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box6',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box7',
         occupied: false,
         occupiedByPlayer: null
-      }),
-      ({
+      },
+      {
         name: 'box8',
         occupied: false,
         occupiedByPlayer: null
-      })
+      }
     ]
   }
 
@@ -68,15 +67,12 @@ class Game {
     }
   }
 
-
+//split into 2 functions
   updatePlayerTurn(playerTurn) {
-    //this.boxesOccupied++;
-    if (playerTurn === this.player1) {
-      this.boxesOccupiedByPlayer1++;
-    } else {
-      this.boxesOccupiedByPlayer2++;
+    this.boxesOccupied++;
+    if (this.boxesOccupied >= 5) {
+      game.countPlayerCells();
     }
-    game.countNumberOfCells();
     if (this.playerTurn === this.player1) {
       this.playerTurn = this.player2;
     } else {
@@ -85,24 +81,31 @@ class Game {
   }
 
 
-  countNumberOfCells() {//this is running too many times, !!!!!!!!!
-  //could change it to total number of cells and then differentiate based on that
-    if (this.boxesOccupiedByPlayer1 >= 3) {//saying to go run the check for winner method
-      console.log("line 90");//***********************************
-      game.checkForWinner(this.Player1);
-    } else if (this.boxesOccupiedByPlayer2 >= 3) {
-      game.checkForWinner(this.Player2);
+  countPlayerCells() {
+    var boxesOccupiedByPlayer1 = 0;
+    var boxesOccupiedByPlayer2 = 0;
+    for (var i = 0; i < this.boxes.length; i++) {
+      if (this.boxes[i].occupiedByPlayer === this.player1) {
+        boxesOccupiedByPlayer1++;
+      } else if (this.boxes[i].occupiedByPlayer === this.player2) {
+        boxesOccupiedByPlayer2++;
+      }
+    }
+    if (boxesOccupiedByPlayer1 > boxesOccupiedByPlayer2) {
+      game.checkForWinner(this.player1);
+    } else {
+      game.checkForWinner(this.player2);
     }
   }
 
 
   checkForWinner(player) {
-    var winningArray = [];
+    var winningArray = [0,4,7,8];
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].occupiedByPlayer === player) {
-        console.log(this.boxes[i]);
-        winningArray.push(this.boxes[i].name);
-        console.log(winningArray);
+        // console.log(this.boxes[i]);
+        winningArray.push(i);
+        // console.log(winningArray);
       }
 //push game to that array
 //innerText you've won!
@@ -112,6 +115,10 @@ class Game {
 }
 
 }
+winningCombos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+
+
+
 
 
       //iterate through game cells to see if 5 or more to start checking for winning conditions

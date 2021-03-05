@@ -24,11 +24,6 @@ h5 {
 }
 
 
-main {
-  background: white;
-}
-
-
 .left-side,
 .right-side {
   display: flex;
@@ -40,6 +35,7 @@ main {
 
 
 .game-section {
+    background: white;
     width: 50%;
     height: 100vh;
     font-size: 50px;
