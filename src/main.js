@@ -31,7 +31,8 @@ function resetGames() {
 
 function targetBoardClick(event) {
   var boxCell = event.target.id;
-  game.updateCell(boxCell)
+  game.updateCell(boxCell);
+  game.updatePlayerBoxCount();
   game.updatePlayerTurn(game.playerTurn);
 }
 

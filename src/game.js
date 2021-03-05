@@ -53,7 +53,6 @@ class Game {
     ]
   }
 
-
   updateCell(boxCell) {//change game boxes to "occupied: true" and who it's occupied by
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell) {
@@ -67,19 +66,20 @@ class Game {
     }
   }
 
-//split into 2 functions
-  updatePlayerTurn(playerTurn) {
+  updatePlayerBoxCount() {
     this.boxesOccupied++;
     if (this.boxesOccupied >= 5) {
       game.countPlayerCells();
     }
+  }
+
+  updatePlayerTurn(playerTurn) {
     if (this.playerTurn === this.player1) {
       this.playerTurn = this.player2;
     } else {
       this.playerTurn = this.player1;
     }
   }
-
 
   countPlayerCells() {
     var boxesOccupiedByPlayer1 = 0;
@@ -98,28 +98,26 @@ class Game {
     }
   }
 
-
   checkForWinner(player) {
-    var winningArray = [0,4,7,8];
+    var boxesOccupiedArray = [];
+    var winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].occupiedByPlayer === player) {
-        // console.log(this.boxes[i]);
-        winningArray.push(i);
-        // console.log(winningArray);
+        boxesOccupiedArray.push(i);
       }
+    }
+    console.log(boxesOccupiedArray); //how do i say if any of the numbers in the boxesOccupiedArray match any combos in winningCombos
+      for (var i = 0; i < winningCombos.length; i++) {
+        console.log("way to go!");
+        if (boxesOccupiedArray.includes(winningCombos[i])) {
+        }
+      }
+      //.filter?
 //push game to that array
 //innerText you've won!
 //reset game method
-
   }
 }
-
-}
-winningCombos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
-
-
-
-
 
       //iterate through game cells to see if 5 or more to start checking for winning conditions
       // 1. boxes 0,1,2
@@ -142,42 +140,3 @@ winningCombos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], 
 //if yes, push win to that players array
 //update local storage method
 //go to a new function to reset board
-
-
-
-    // this.box0 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box1 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box2 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box3 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box4 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box5 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box6 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box7 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
-    // this.box8 = {
-    //   occupied: false,
-    //   occupiedByPlayer: null
-    // }
