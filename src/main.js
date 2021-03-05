@@ -1,18 +1,24 @@
-//review
+
 var resetButton = document.getElementById('resetBtn');
 var starWins = document.getElementById('starWins');
 var heartWins = document.getElementById('heartWins');
 var gameBoard = document.getElementById('gameBoard');
-var box = document.getElementById('box0')//now use event delegation to do this
+var box = document.getElementById('box0');//now use event delegation to do this
+
+var game = new Game();
+
+
 resetButton.addEventListener('click', resetGames);
 gameBoard.addEventListener('click', targetBoardClick)
-
 window.addEventListener('load', renderLocalStorageWins);
+
+
+
 
 function renderLocalStorageWins() {
   // display the wins for each player on the top
-  var game = new Game();
-  console.log(game)
+  // var game = new Game();
+  // console.log(game)
 
 // box.innerText = "Heart"
   //initiate 2 player instances
@@ -42,6 +48,11 @@ function targetBoardClick(event) {
    }
     // }
 }
+
+
+
+
+
 
 
 function displayPlayerWins(player, number) {
