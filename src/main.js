@@ -17,6 +17,7 @@ resetButton.addEventListener('click', resetGame);
 
 
 function renderLocalStorageWins() {
+  //see last function below, use that instead?
   // display the wins for each player on the top
 
 // box.innerText = "Heart"
@@ -27,11 +28,13 @@ function renderLocalStorageWins() {
 function targetBoardClick(event) {
   var boxCell = event.target;
   game.updateCell(boxCell);
+  console.log(boxCell);
   // displayGamePiece(boxCell); here isntead of game.js line 60?
 }
 
 
 function displayGamePiece(boxCell) {
+  // console.log(game.playerTurn);
     boxCell.innerHTML = game.playerTurn.token;
 }
 
@@ -47,15 +50,17 @@ function displayWinnerToken(winner) {
 
 
 function resetGame() {
+  game = new Game();
   resetBoard();
   deleteWinsFromLocalStorage()
-  var game = new Game();
 }
 
 
-function resetBoard() {
-  // mainHeading.innerText =
-//make board empty and main
+function resetBoard() {//************************
+  displayPlayerTurn(game.player1.token);
+  for (var i = 0; i< game.boxes.length; i++) {
+//clear out the board!
+  }
 }
 
 
@@ -65,13 +70,13 @@ function deleteWinsFromLocalStorage() {
 
 
 function displayPlayerWins(player, number) {//not invoked yet
-  if (player === player1) {
+  if (player === game.player1) {
     if (number === 1) {
       starWins.innerText = '1 win';
     } else {
       starWins.innerText = `${number} wins`;
     }
-    if (player === player2) {
+    if (player === game.player2) {
       if (number === 1) {
         heartWins.innerText = '1 win';
       } else {
