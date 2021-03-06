@@ -25,24 +25,26 @@ function targetBoardClick(event) {
   var boxCell = event.target;
   game.updateCell(boxCell);
   var result = game.checkForWinner();
-console.log(result);
   if (result === true) {
     // gameBoard.disable = true;///this doesn't work not a button!
     displayWinnerToken(game.playerTurn.token);
-    console.log('line30')
     displayPlayerWins(game.playerTurn, game.playerTurn.wins)
     setResetTimer();
+  } else {
+    game.updatePlayerTurn()//move to game js?
   }
 }
-
 
 function displayGamePiece(boxCell) {
   boxCell.innerHTML = game.playerTurn.token;
 }
 
-
 function displayWinnerToken(winner) {
-  mainHeading.innerText = `${winner} won!`;
+  if (winner === "draw") {
+    mainHeading.innerText = "It's a draw!";
+  } else {
+    mainHeading.innerText = `${winner} won!`;
+  }
 }
 
 
@@ -67,7 +69,7 @@ function displayPlayerWins(player, number) {
 // }
 
 function setResetTimer() {
-  setTimeout(function(){resetGame()}, 2000);
+  setTimeout(function(){resetBoard()}, 2000);
 }
 
 function resetGame() {
@@ -84,9 +86,11 @@ function resetBoard() {
   } else if (game.rounds % 2 === 0) {
     displayPlayerTurn(game.player2.token)
   };
+  game.updatePlayerTurn();//move to gamejs????
   for (var i = 0; i < boxes.length; i++) {
     boxes[i].innerHTML = " ";
   }
+  game.resetBoardValues();
 }
 
 
