@@ -23,14 +23,15 @@ function renderLocalStorageWins() {
 
 function targetBoardClick(event) {
   var boxCell = event.target;
-  var result = game.updateCell(boxCell);//change this name?
+  game.updateCell(boxCell);
+  var result = game.checkForWinner();
+console.log(result);
   if (result === true) {
     // gameBoard.disable = true;///this doesn't work not a button!
     displayWinnerToken(game.playerTurn.token);
     console.log('line30')
     displayPlayerWins(game.playerTurn, game.playerTurn.wins)
     setResetTimer();
-    console.log('line 30');
   }
 }
 
@@ -41,7 +42,6 @@ function displayGamePiece(boxCell) {
 
 
 function displayWinnerToken(winner) {
-  console.log(winner);
   mainHeading.innerText = `${winner} won!`;
 }
 
