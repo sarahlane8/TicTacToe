@@ -14,22 +14,16 @@ gameBoard.addEventListener('click', targetBoardClick)
 resetButton.addEventListener('click', resetGame);
 
 
-
-
 function renderLocalStorageWins() {
-  //see last function below, use that instead?
+  //can this be combined with the last function?
   // display the wins for each player on the top
-
 // box.innerText = "Heart"
-
 }
 
 
 function targetBoardClick(event) {
   var boxCell = event.target;
   game.updateCell(boxCell);
-  console.log(boxCell);
-  // displayGamePiece(boxCell); here isntead of game.js line 60?
 }
 
 
@@ -46,6 +40,7 @@ function displayPlayerTurn(player) {
 
 function displayWinnerToken(winner) {
     mainHeading.innerText = `${winner} won!`;
+    console.log(winner)
 }
 
 
@@ -69,13 +64,14 @@ function deleteWinsFromLocalStorage() {
 }
 
 
-function displayPlayerWins(player, number) {//not invoked yet
+function displayPlayerWins(player, number) {
   if (player === game.player1) {
     if (number === 1) {
       starWins.innerText = '1 win';
     } else {
       starWins.innerText = `${number} wins`;
     }
+  }
     if (player === game.player2) {
       if (number === 1) {
         heartWins.innerText = '1 win';
@@ -84,4 +80,3 @@ function displayPlayerWins(player, number) {//not invoked yet
       }
     }
   }
-}
