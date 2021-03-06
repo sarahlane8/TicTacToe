@@ -106,37 +106,16 @@ class Game {
         boxesOccupiedArray.push(i);
       }
     }
-    console.log(boxesOccupiedArray); //how do i say if any of the numbers in the boxesOccupiedArray match any combos in winningCombos
-      for (var i = 0; i < winningCombos.length; i++) {
-        console.log("way to go!");
-        if (boxesOccupiedArray.includes(winningCombos[i])) {
+    for (var i = 0; i < winningCombos.length; i++) {
+      var a = winningCombos[i][0];
+      var b = winningCombos[i][1];
+      var c = winningCombos[i][2];
+      if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
+          player.wins.push(game);
+          mainHeading.innerText = `${player.token} won!`;
+          resetGame();
+          //update local storage
         }
       }
-      //.filter?
-//push game to that array
-//innerText you've won!
-//reset game method
+    }
   }
-}
-
-      //iterate through game cells to see if 5 or more to start checking for winning conditions
-      // 1. boxes 0,1,2
-      // 2. boxes 3,4,5
-      // 3. boxes 6,7,8
-      // 4. boxes 0,3,6
-      // 5. boxes 1,4,7
-      // 6. boxes 2,5,8
-      // 7. boxes 0,4,8
-      // 8. boxes 2,4,6
-
-
-
-
-
-
-
-
-//compare the game board against any winning solutions
-//if yes, push win to that players array
-//update local storage method
-//go to a new function to reset board
