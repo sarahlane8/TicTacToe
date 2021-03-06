@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
-    this.boxesOccupied = 0;
+    this.rounds = 0; //odd start player1, even start player 2
     this.boxes = [
       {name: 'box0',
         occupied: false,
@@ -53,52 +53,24 @@ class Game {
     ]
   }
 
-  updateCell(boxCell) {//change game boxes to "occupied: true" and who it's occupied by
+  updateCell(boxCell) {
     for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].name === boxCell) {
+      if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
         this.boxes[i].occupied = true;
-        if (this.playerTurn === this.player1) {
-          this.boxes[i].occupiedByPlayer = this.player1;
-        } else {
-          this.boxes[i].occupiedByPlayer = this.player2;
-        }
+        displayGamePiece(boxCell);//MOVE TO JS SOMEHOW???*************
+        this.boxes[i].occupiedByPlayer = this.playerTurn;
+        this.checkForWinner();
       }
     }
   }
 
-  updatePlayerBoxCount() {
-    this.boxesOccupied++;
-    if (this.boxesOccupied >= 5) {
-      game.countPlayerCells();
-    }
-  }
-
-  updatePlayerTurn(playerTurn) {
+  checkForWinner() {
+    var player;
     if (this.playerTurn === this.player1) {
-      this.playerTurn = this.player2;
+      player = this.player1;
     } else {
-      this.playerTurn = this.player1;
+      player = this.player2;
     }
-  }
-
-  countPlayerCells() {
-    var boxesOccupiedByPlayer1 = 0;
-    var boxesOccupiedByPlayer2 = 0;
-    for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].occupiedByPlayer === this.player1) {
-        boxesOccupiedByPlayer1++;
-      } else if (this.boxes[i].occupiedByPlayer === this.player2) {
-        boxesOccupiedByPlayer2++;
-      }
-    }
-    if (boxesOccupiedByPlayer1 > boxesOccupiedByPlayer2) {
-      game.checkForWinner(this.player1);
-    } else {
-      game.checkForWinner(this.player2);
-    }
-  }
-
-  checkForWinner(player) {
     var boxesOccupiedArray = [];
     var winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     for (var i = 0; i < this.boxes.length; i++) {
@@ -106,16 +78,50 @@ class Game {
         boxesOccupiedArray.push(i);
       }
     }
+    this.checkForDraw()
     for (var i = 0; i < winningCombos.length; i++) {
       var a = winningCombos[i][0];
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
-          player.wins.push(game);
-          mainHeading.innerText = `${player.token} won!`;
-          resetGame();
-          //update local storage
-        }
+        console.log('hello');
+          player.wins++;
+          this.rounds++;
+          return true;
       }
     }
+}
+    checkForDraw() {
+      var totalBoxes = 0;
+      for (var i = 0; i < this.boxes.length; i++) {
+        if (this.boxes[i].occupied === true) {
+          totalBoxes++;
+        }
+      }
+      // console.log(totalBoxes, "99");
+      if (totalBoxes === 9) {
+        displayWinnerToken("draw");
+      }
+    }
+    resetBoardValues() {
+      for (var i = 0; i < this.boxes.length; i++) {
+        this.boxes[i].occupied = false;
+        this.boxes[i].occupiedByPlayer = null;
+      }
+    }
+
+
+        // this.updatePlayerTurn();//only run if there was no winner!! ****************
+        // return false;
+          //update local storage player.saveWinsToStorage();
+
+
+  updatePlayerTurn() {
+    if (this.playerTurn === this.player1) {
+      this.playerTurn = this.player2;
+    } else {
+      this.playerTurn = this.player1;
+    }
+    displayPlayerTurn(this.playerTurn.token);//move to main JS????
   }
+}
