@@ -4,6 +4,7 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
+    this.rounds = 0; //odd start player1, even start player 2
     this.boxes = [
       {name: 'box0',
         occupied: false,
@@ -56,7 +57,7 @@ class Game {
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
         this.boxes[i].occupied = true;
-        displayGamePiece(boxCell);
+        displayGamePiece(boxCell);//MOVE TO JS SOMEHOW???*************
         this.boxes[i].occupiedByPlayer = this.playerTurn;
         if (this.playerTurn === this.player1) {
           this.checkForWinner(this.player1);
@@ -68,7 +69,6 @@ class Game {
   }
 
   checkForWinner(player) {
-    console.log(player);
     var boxesOccupiedArray = [];
     var winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     for (var i = 0; i < this.boxes.length; i++) {
@@ -81,16 +81,19 @@ class Game {
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
+        console.log('hello');
           player.wins++;
-          displayWinnerToken(player.token);
-          displayPlayerWins(player, player.wins);
-          resetBoard();
-          //update local storage player.saveWinsToStorage();
-          //end the function
+          this.rounds++;
+          return true;
       }
+    }
+        this.updatePlayerTurn();//only run if there was no winner!! ****************
+        return false;
+
+          // resetBoard();//set timer BEFORE THIS
+          //update local storage player.saveWinsToStorage();
+          //return a statement so that if it's false and boxes are all occupied, it's a draw
   }
-  this.updatePlayerTurn();
-}
 
   updatePlayerTurn() {
     if (this.playerTurn === this.player1) {

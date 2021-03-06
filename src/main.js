@@ -5,17 +5,17 @@ var heartWins = document.getElementById('heartWins');
 var gameBoard = document.getElementById('gameBoard');
 var box = document.getElementById('box0');//now use event delegation to do this
 var mainHeading = document.getElementById('mainHeading');
+var boxes = document.querySelectorAll('.box');
 
 var game = new Game();
-
 
 window.addEventListener('load', renderLocalStorageWins);
 gameBoard.addEventListener('click', targetBoardClick)
 resetButton.addEventListener('click', resetGame);
 
-
 function renderLocalStorageWins() {
-  //can this be combined with the last function?
+  //play retrieveWinsFromStorage
+  //can this be combined with displaywins function?
   // display the wins for each player on the top
 // box.innerText = "Heart"
 }
@@ -23,44 +23,26 @@ function renderLocalStorageWins() {
 
 function targetBoardClick(event) {
   var boxCell = event.target;
-  game.updateCell(boxCell);
-}
-
-
-function displayGamePiece(boxCell) {
-  // console.log(game.playerTurn);
-    boxCell.innerHTML = game.playerTurn.token;
-}
-
-
-function displayPlayerTurn(player) {
-  mainHeading.innerText = `It's ${player}'s turn!`;
-}
-
-
-function displayWinnerToken(winner) {
-    mainHeading.innerText = `${winner} won!`;
-    console.log(winner)
-}
-
-
-function resetGame() {
-  game = new Game();
-  resetBoard();
-  deleteWinsFromLocalStorage()
-}
-
-
-function resetBoard() {//************************
-  displayPlayerTurn(game.player1.token);
-  for (var i = 0; i< game.boxes.length; i++) {
-//clear out the board!
+  var result = game.updateCell(boxCell);//change this name?
+  if (result === true) {
+    // gameBoard.disable = true;///this doesn't work not a button!
+    displayWinnerToken(game.playerTurn.token);
+    console.log('line30')
+    displayPlayerWins(game.playerTurn, game.playerTurn.wins)
+    setResetTimer();
+    console.log('line 30');
   }
 }
 
 
-function deleteWinsFromLocalStorage() {
-//clear out local storage
+function displayGamePiece(boxCell) {
+  boxCell.innerHTML = game.playerTurn.token;
+}
+
+
+function displayWinnerToken(winner) {
+  console.log(winner);
+  mainHeading.innerText = `${winner} won!`;
 }
 
 
@@ -72,11 +54,47 @@ function displayPlayerWins(player, number) {
       starWins.innerText = `${number} wins`;
     }
   }
-    if (player === game.player2) {
-      if (number === 1) {
-        heartWins.innerText = '1 win';
-      } else {
-        heartWins.innerText = `${number} wins`;
-      }
+  if (player === game.player2) {
+    if (number === 1) {
+      heartWins.innerText = '1 win';
+    } else {
+      heartWins.innerText = `${number} wins`;
     }
   }
+}
+// if (checkForWinner()) {
+//   disable button
+// }
+
+function setResetTimer() {
+  setTimeout(function(){resetGame()}, 2000);
+}
+
+function resetGame() {
+  game = new Game();
+  resetBoard();
+  deleteWinsFromLocalStorage()
+}
+
+
+function resetBoard() {
+  // button.disable//
+  if (game.rounds % 2 === 1) {
+    displayPlayerTurn(game.player1.token);
+  } else if (game.rounds % 2 === 0) {
+    displayPlayerTurn(game.player2.token)
+  };
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].innerHTML = " ";
+  }
+}
+
+
+function deleteWinsFromLocalStorage() {
+  //clear out local storage
+}
+
+
+function displayPlayerTurn(player) {
+  mainHeading.innerText = `It's ${player}'s turn!`;
+}
