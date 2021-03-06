@@ -106,18 +106,23 @@ class Game {
         boxesOccupiedArray.push(i);
       }
     }
-    console.log(boxesOccupiedArray); //how do i say if any of the numbers in the boxesOccupiedArray match any combos in winningCombos
-      for (var i = 0; i < winningCombos.length; i++) {
-        console.log("way to go!");
-        if (boxesOccupiedArray.includes(winningCombos[i])) {
+    for (var i = 0; i < winningCombos.length; i++) {
+      var a = winningCombos[i][0];
+      var b = winningCombos[i][1];
+      var c = winningCombos[i][2];
+      if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
+          player.wins.push(game);
+          
         }
       }
+    }
+  }
       //.filter?
 //push game to that array
 //innerText you've won!
 //reset game method
-  }
-}
+
+
 
       //iterate through game cells to see if 5 or more to start checking for winning conditions
       // 1. boxes 0,1,2
