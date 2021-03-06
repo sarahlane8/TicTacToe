@@ -52,21 +52,18 @@ class Game {
       }
     ]
   }
-
-  updateCell(boxCell) {//change game boxes to "occupied: true" and who it's occupied by
+//JUST UPDATE TURN EVERY TIME AND THEN END THE GAME IF THERES A WINNER
+  updateCell(boxCell) {
     for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].name === boxCell && this.boxes[i].occupied === false) {//need this if statement to prevent the rest from happening if the cell is already taken
+      if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
         this.boxes[i].occupied = true;
-        if (this.playerTurn === this.player1) {
-          this.boxes[i].occupiedByPlayer = this.player1;
-        } else {
-          this.boxes[i].occupiedByPlayer = this.player2;
-        }
-        game.updatePlayerBoxCount();
-        game.updatePlayerTurn(this.playerTurn);//not the right spot for this
-      }
+        displayGamePiece(boxCell);
+        this.boxes[i].occupiedByPlayer = this.playerTurn;
+        this.updatePlayerBoxCount();
+        this.updatePlayerTurn();
     }
   }
+}
 
   updatePlayerBoxCount() {
     this.boxesOccupied++;
@@ -75,12 +72,13 @@ class Game {
     }
   }
 
-  updatePlayerTurn(playerTurn) {
+  updatePlayerTurn() {
     if (this.playerTurn === this.player1) {
       this.playerTurn = this.player2;
     } else {
       this.playerTurn = this.player1;
     }
+    displayPlayerTurn(this.playerTurn.token);
   }
 
   countPlayerCells() {
@@ -93,7 +91,9 @@ class Game {
         boxesOccupiedByPlayer2++;
       }
     }
-    if (boxesOccupiedByPlayer1 > boxesOccupiedByPlayer2) {
+    // console.log(boxesOccupiedByPlayer1);
+    // console.log(boxesOccupiedByPlayer2);
+    if (boxesOccupiedByPlayer1 > boxesOccupiedByPlayer2) {//not who has more, whose turn it is
       game.checkForWinner(this.player1);
     } else {
       game.checkForWinner(this.player2);
@@ -101,6 +101,7 @@ class Game {
   }
 
   checkForWinner(player) {
+    console.log(player);
     var boxesOccupiedArray = [];
     var winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     for (var i = 0; i < this.boxes.length; i++) {
@@ -114,11 +115,15 @@ class Game {
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
           player.wins.push(game);
-
-        displayWinnerName(player);
-        resetGame();
+          console.log(this.player1.token);
+          displayWinnerToken(player.token);
+          // return;
+          // resetGame();
           //update local storage player.saveWinsToStorage();
-        }
-      }
+          //end the function
+      } else {
+      this.updatePlayerTurn()
     }
   }
+}
+}

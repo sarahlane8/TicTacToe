@@ -20,25 +20,31 @@ function renderLocalStorageWins() {
   // display the wins for each player on the top
 
 // box.innerText = "Heart"
-  //initiate 2 player instances?? take it out of a global variable?
+
 }
 
 
 function targetBoardClick(event) {
   var boxCell = event.target;
-  game.updateCell(boxCell.id);
-  displayGamePiece(boxCell);
-  // game.updatePlayerBoxCount();
-  // game.updatePlayerTurn(game.playerTurn);
+  game.updateCell(boxCell);
+  // displayGamePiece(boxCell); here isntead of game.js line 60?
 }
+
 
 function displayGamePiece(boxCell) {
-  boxCell.innerHTML = game.playerTurn.token;
+    boxCell.innerHTML = game.playerTurn.token;
 }
 
-function displayWinnerName(winner){
-    mainHeading.innerText = `${winner.token} won!`;
+
+function displayPlayerTurn(player) {
+  mainHeading.innerText = `It's ${player}'s turn!`;
 }
+
+
+function displayWinnerToken(winner) {
+    mainHeading.innerText = `${winner} won!`;
+}
+
 
 function resetGame() {
   resetBoard();
