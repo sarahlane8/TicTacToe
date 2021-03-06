@@ -20,15 +20,24 @@ function renderLocalStorageWins() {
   // display the wins for each player on the top
 
 // box.innerText = "Heart"
-  //initiate 2 player instances
+  //initiate 2 player instances?? take it out of a global variable?
 }
 
 
 function targetBoardClick(event) {
-  var boxCell = event.target.id;
-  game.updateCell(boxCell);
-  game.updatePlayerBoxCount();
-  game.updatePlayerTurn(game.playerTurn);
+  var boxCell = event.target;
+  game.updateCell(boxCell.id);
+  displayGamePiece(boxCell);
+  // game.updatePlayerBoxCount();
+  // game.updatePlayerTurn(game.playerTurn);
+}
+
+function displayGamePiece(boxCell) {
+  boxCell.innerHTML = game.playerTurn.token;
+}
+
+function displayWinnerName(winner){
+    mainHeading.innerText = `${winner.token} won!`;
 }
 
 function resetGame() {
@@ -37,14 +46,17 @@ function resetGame() {
   var game = new Game();
 }
 
+
 function resetBoard() {
-  // mainHeading.innerText = 
+  // mainHeading.innerText =
 //make board empty and main
 }
+
 
 function deleteWinsFromLocalStorage() {
 //clear out local storage
 }
+
 
 function displayPlayerWins(player, number) {//not invoked yet
   if (player === player1) {

@@ -55,13 +55,15 @@ class Game {
 
   updateCell(boxCell) {//change game boxes to "occupied: true" and who it's occupied by
     for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].name === boxCell) {
+      if (this.boxes[i].name === boxCell && this.boxes[i].occupied === false) {//need this if statement to prevent the rest from happening if the cell is already taken
         this.boxes[i].occupied = true;
         if (this.playerTurn === this.player1) {
           this.boxes[i].occupiedByPlayer = this.player1;
         } else {
           this.boxes[i].occupiedByPlayer = this.player2;
         }
+        game.updatePlayerBoxCount();
+        game.updatePlayerTurn(this.playerTurn);//not the right spot for this
       }
     }
   }
@@ -112,9 +114,10 @@ class Game {
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
           player.wins.push(game);
-          mainHeading.innerText = `${player.token} won!`;
-          resetGame();
-          //update local storage
+
+        displayWinnerName(player);
+        resetGame();
+          //update local storage player.saveWinsToStorage();
         }
       }
     }
