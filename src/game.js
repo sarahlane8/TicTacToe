@@ -53,14 +53,25 @@ class Game {
     ]
   }
 
+  isCellOccupied(boxCell) {
+    for (var i = 0; i < this.boxes.length; i++) {
+      if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   updateCell(boxCell) {
     for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied === false) {
+      if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
         this.boxes[i].occupied = true;
         this.boxes[i].occupiedByPlayer = this.playerTurn;
       }
     }
   }
+
 
   checkForWinner() {
     var player;
@@ -76,35 +87,43 @@ class Game {
         boxesOccupiedArray.push(i);
       }
     }
-    this.checkForDraw()//is this the right place for this?
-    for (var i = 0; i < winningCombos.length; i++) {//0,1,3,4,6
+    // this.checkForDraw()//is this the right place for this?
+    for (var i = 0; i < winningCombos.length; i++) {
       var a = winningCombos[i][0];
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
         player.wins++;
-        this.rounds++;
+        this.addRound();
         return true;
       }
     }
-}
-    checkForDraw() {
-      var totalBoxes = 0;
-      for (var i = 0; i < this.boxes.length; i++) {
-        if (this.boxes[i].occupied) {
-          totalBoxes++;
-        }
-      }
-      if (totalBoxes === 9) {
-        displayWinnerToken();
-      }
-    }
-    resetBoardValues() {
-      for (var i = 0; i < this.boxes.length; i++) {
-        this.boxes[i].occupied = false;
-        this.boxes[i].occupiedByPlayer = null;
+  }
+
+  addRound() {
+    this.rounds++
+  }
+
+  checkForDraw() {
+    var totalBoxes = 0;
+    for (var i = 0; i < this.boxes.length; i++) {
+      if (this.boxes[i].occupied) {
+        totalBoxes++;
       }
     }
+    if (totalBoxes === 9) {
+      this.addRound();
+      return true;
+    }
+    return false;
+  }
+
+  resetBoardValues() {
+    for (var i = 0; i < this.boxes.length; i++) {
+      this.boxes[i].occupied = false
+      this.boxes[i].occupiedByPlayer = null;
+    }
+  }
 
 
         // this.updatePlayerTurn();//only run if there was no winner!! ****************
