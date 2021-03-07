@@ -31,7 +31,7 @@ function targetBoardClick(event) {
     displayPlayerWins(game.playerTurn, game.playerTurn.wins)
     setResetTimer();
   } else {
-    game.updatePlayerTurn()//move to game js?
+    game.updatePlayerTurn()//move to game js?//only if they clicked on an empty box
   }
 }
 
@@ -40,7 +40,8 @@ function displayGamePiece(boxCell) {
 }
 
 function displayWinnerToken(winner) {
-  if (winner === "draw") {
+  // console.log(winner);
+  if (!winner) {
     mainHeading.innerText = "It's a draw!";
   } else {
     mainHeading.innerText = `${winner} won!`;
@@ -81,9 +82,9 @@ function resetGame() {
 
 function resetBoard() {
   // button.disable//
-  if (game.rounds % 2 === 1) {
+  if (game.rounds % 2 === 0) {
     displayPlayerTurn(game.player1.token);
-  } else if (game.rounds % 2 === 0) {
+  } else if (game.rounds % 2 === 1) {
     displayPlayerTurn(game.player2.token)
   };
   game.updatePlayerTurn();//move to gamejs????

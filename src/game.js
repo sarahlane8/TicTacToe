@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
-    this.rounds = 0; //odd start player1, even start player 2
+    this.rounds = 0;
     this.boxes = [
       {name: 'box0',
         occupied: false,
@@ -55,11 +55,10 @@ class Game {
 
   updateCell(boxCell) {
     for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
+      if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied === false) {
         this.boxes[i].occupied = true;
-        displayGamePiece(boxCell);//MOVE TO JS SOMEHOW???*************
+        displayGamePiece(boxCell);//MOVE TO main JS SOMEHOW???*************
         this.boxes[i].occupiedByPlayer = this.playerTurn;
-        this.checkForWinner();
       }
     }
   }
@@ -79,7 +78,7 @@ class Game {
       }
     }
     this.checkForDraw()
-    for (var i = 0; i < winningCombos.length; i++) {
+    for (var i = 0; i < winningCombos.length; i++) {//0,1,3,4,6
       var a = winningCombos[i][0];
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
@@ -98,9 +97,9 @@ class Game {
           totalBoxes++;
         }
       }
-      // console.log(totalBoxes, "99");
+      // console.log(totalBoxes);
       if (totalBoxes === 9) {
-        displayWinnerToken("draw");
+        displayWinnerToken();
       }
     }
     resetBoardValues() {
