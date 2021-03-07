@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player("⭐️");
     this.player2 = new Player("❤️");
     this.playerTurn = this.player1;
-    this.rounds = 0; //odd start player1, even start player 2
+    this.rounds = 0;
     this.boxes = [
       {name: 'box0',
         occupied: false,
@@ -53,16 +53,25 @@ class Game {
     ]
   }
 
+  isCellOccupied(boxCell) {
+    for (var i = 0; i < this.boxes.length; i++) {
+      if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   updateCell(boxCell) {
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
         this.boxes[i].occupied = true;
-        displayGamePiece(boxCell);//MOVE TO JS SOMEHOW???*************
         this.boxes[i].occupiedByPlayer = this.playerTurn;
-        this.checkForWinner();
       }
     }
   }
+
 
   checkForWinner() {
     var player;
@@ -78,37 +87,43 @@ class Game {
         boxesOccupiedArray.push(i);
       }
     }
-    this.checkForDraw()
+    // this.checkForDraw()//is this the right place for this?
     for (var i = 0; i < winningCombos.length; i++) {
       var a = winningCombos[i][0];
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
-        console.log('hello');
-          player.wins++;
-          this.rounds++;
-          return true;
+        player.wins++;
+        this.addRound();
+        return true;
       }
     }
-}
-    checkForDraw() {
-      var totalBoxes = 0;
-      for (var i = 0; i < this.boxes.length; i++) {
-        if (this.boxes[i].occupied === true) {
-          totalBoxes++;
-        }
-      }
-      // console.log(totalBoxes, "99");
-      if (totalBoxes === 9) {
-        displayWinnerToken("draw");
-      }
-    }
-    resetBoardValues() {
-      for (var i = 0; i < this.boxes.length; i++) {
-        this.boxes[i].occupied = false;
-        this.boxes[i].occupiedByPlayer = null;
+  }
+
+  addRound() {
+    this.rounds++
+  }
+
+  checkForDraw() {
+    var totalBoxes = 0;
+    for (var i = 0; i < this.boxes.length; i++) {
+      if (this.boxes[i].occupied) {
+        totalBoxes++;
       }
     }
+    if (totalBoxes === 9) {
+      this.addRound();
+      return true;
+    }
+    return false;
+  }
+
+  resetBoardValues() {
+    for (var i = 0; i < this.boxes.length; i++) {
+      this.boxes[i].occupied = false
+      this.boxes[i].occupiedByPlayer = null;
+    }
+  }
 
 
         // this.updatePlayerTurn();//only run if there was no winner!! ****************
@@ -122,6 +137,5 @@ class Game {
     } else {
       this.playerTurn = this.player1;
     }
-    displayPlayerTurn(this.playerTurn.token);//move to main JS????
   }
 }

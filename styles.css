@@ -1,3 +1,4 @@
+
 body {
   background: linear-gradient(pink, purple, navy);
   background-repeat: no-repeat;
@@ -8,7 +9,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 h3,
 h4 {
@@ -54,6 +54,9 @@ h5 {
   align-items: center;
 }
 
+.disable {
+  pointer-events: none;
+}
 
 .box {
   box-sizing: border-box;
