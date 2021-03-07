@@ -16,11 +16,14 @@ resetButton.addEventListener('click', resetGame);
 function renderLocalStorageWins() {
   var player1LSWins = game.player1.retrieveWinsFromStorage(game.player1.id);
   var player2LSWins = game.player2.retrieveWinsFromStorage(game.player2.id);
-  game.updatePlayerWins(game.player1, player1LSWins)
-  game.updatePlayerWins(game.player2, player2LSWins)
-  displayPlayerWins(game.player1, player1LSWins);
-  displayPlayerWins(game.player2, player2LSWins);
-//updateDOM
+  if (player1LSWins) {
+    game.updatePlayerWins(game.player1, player1LSWins)
+    displayPlayerWins(game.player1, player1LSWins);
+  }
+  if (player2LSWins) {
+    game.updatePlayerWins(game.player2, player2LSWins)
+    displayPlayerWins(game.player2, player2LSWins);
+  }
 }
 
 
@@ -103,6 +106,8 @@ function setResetTimer() {
 function resetGame() {
   game = new Game();
   resetBoard();
+  displayPlayerWins(game.player1, 0);
+  displayPlayerWins(game.player2, 0);
   localStorage.clear();
 }
 
