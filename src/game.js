@@ -1,8 +1,8 @@
 
 class Game {
   constructor() {
-    this.player1 = new Player("⭐️");
-    this.player2 = new Player("❤️");
+    this.player1 = new Player(1, "⭐️");
+    this.player2 = new Player(2, "❤️");
     this.playerTurn = this.player1;
     this.rounds = 0;
     this.boxes = [
@@ -87,13 +87,13 @@ class Game {
         boxesOccupiedArray.push(i);
       }
     }
-    // this.checkForDraw()//is this the right place for this?
     for (var i = 0; i < winningCombos.length; i++) {
       var a = winningCombos[i][0];
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
         player.wins++;
+        player.saveWinsToStorage();
         this.addRound();
         return true;
       }
@@ -125,10 +125,7 @@ class Game {
     }
   }
 
-
-        // this.updatePlayerTurn();//only run if there was no winner!! ****************
-        // return false;
-          //update local storage player.saveWinsToStorage();
+          //update local storage player.saveWinsToStorage(this.player.....?);
 
 
   updatePlayerTurn() {
@@ -137,5 +134,9 @@ class Game {
     } else {
       this.playerTurn = this.player1;
     }
+  }
+
+  updatePlayerWins(player, wins) {
+    player.wins = wins;
   }
 }

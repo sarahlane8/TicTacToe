@@ -14,11 +14,23 @@ gameBoard.addEventListener('click', targetBoardClick)
 resetButton.addEventListener('click', resetGame);
 
 function renderLocalStorageWins() {
+var player1LSWins = game.player1.retrieveWinsFromStorage(game.player1.id);
+var player2LSWins = game.player2.retrieveWinsFromStorage(game.player2.id);
+game.updatePlayerWins(game.player1, player1LSWins)
+game.updatePlayerWins(game.player2, player2LSWins)//udpate DM
+//updateDOM
+}
+
+
+//add a condtional? what if there's nothign in local storagE?
+  // displayPlayerWins(gameStored.)
+
+
   //play retrieveWinsFromStorage
   //can this be combined with displaywins function?
   // display the wins for each player on the top
 // box.innerText = "Heart"
-}
+// }
 
 
 function targetBoardClick(event) {
@@ -41,27 +53,18 @@ function targetBoardClick(event) {
   if (isDraw) {
     displayWinnerToken();
     setResetTimer();
-    // resetBoard();
     return;
-
   }
-  //check if it's a drawm game
-  //if it's a draw, we need to update player turn in dom and dm, we need to clear innerhtml board, clear the board in the data model
   game.updatePlayerTurn()//move to game js?//only if they clicked on an empty box
   displayPlayerTurn(game.playerTurn.token);
-// displayWinnerToken();
+  // player.saveWinsToStorage();
 }
-
-
-//make function to check if cell is occupied,
-//if occupied, don't let data model update
-// make dom not clickable (change cursor?)
-//return out
 
 
 function displayGamePiece(boxCell) {
   boxCell.innerHTML = game.playerTurn.token;
 }
+
 
 function displayWinnerToken(winner) {
   if (!winner) {
@@ -88,18 +91,17 @@ function displayPlayerWins(player, number) {
     }
   }
 }
-// if (checkForWinner()) {
-//   disable button
-// }
+
 
 function setResetTimer() {
   setTimeout(function(){resetBoard()}, 2000);
 }
 
+
 function resetGame() {
   game = new Game();
   resetBoard();
-  deleteWinsFromLocalStorage()
+  localStorage.clear();
 }
 
 
@@ -115,11 +117,6 @@ function resetBoard() {
     boardBoxes[i].innerHTML = " ";
   }
   game.resetBoardValues();
-}
-
-
-function deleteWinsFromLocalStorage() {
-  //clear out local storage
 }
 
 
