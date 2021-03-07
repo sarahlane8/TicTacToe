@@ -57,7 +57,6 @@ class Game {
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied === false) {
         this.boxes[i].occupied = true;
-        displayGamePiece(boxCell);//MOVE TO main JS SOMEHOW???*************
         this.boxes[i].occupiedByPlayer = this.playerTurn;
       }
     }
@@ -77,27 +76,25 @@ class Game {
         boxesOccupiedArray.push(i);
       }
     }
-    this.checkForDraw()
+    this.checkForDraw()//is this the right place for this?
     for (var i = 0; i < winningCombos.length; i++) {//0,1,3,4,6
       var a = winningCombos[i][0];
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
-        console.log('hello');
-          player.wins++;
-          this.rounds++;
-          return true;
+        player.wins++;
+        this.rounds++;
+        return true;
       }
     }
 }
     checkForDraw() {
       var totalBoxes = 0;
       for (var i = 0; i < this.boxes.length; i++) {
-        if (this.boxes[i].occupied === true) {
+        if (this.boxes[i].occupied) {
           totalBoxes++;
         }
       }
-      // console.log(totalBoxes);
       if (totalBoxes === 9) {
         displayWinnerToken();
       }
@@ -121,6 +118,5 @@ class Game {
     } else {
       this.playerTurn = this.player1;
     }
-    displayPlayerTurn(this.playerTurn.token);//move to main JS????
   }
 }

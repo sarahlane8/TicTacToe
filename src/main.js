@@ -5,7 +5,7 @@ var heartWins = document.getElementById('heartWins');
 var gameBoard = document.getElementById('gameBoard');
 var box = document.getElementById('box0');//now use event delegation to do this
 var mainHeading = document.getElementById('mainHeading');
-var boxes = document.querySelectorAll('.box');
+var boardBoxes = document.querySelectorAll('.box');
 
 var game = new Game();
 
@@ -24,13 +24,15 @@ function renderLocalStorageWins() {
 function targetBoardClick(event) {
   var boxCell = event.target;
   game.updateCell(boxCell);
+  displayGamePiece(boxCell)
   var result = game.checkForWinner();
   if (result === true) {
-    // gameBoard.disable = true;///this doesn't work not a button!
+    gameBoard.classList.add('disable');
     displayWinnerToken(game.playerTurn.token);
     displayPlayerWins(game.playerTurn, game.playerTurn.wins)
     setResetTimer();
   } else {
+    displayPlayerTurn(game.playerTurn.token);
     game.updatePlayerTurn()//move to game js?//only if they clicked on an empty box
   }
 }
@@ -40,7 +42,6 @@ function displayGamePiece(boxCell) {
 }
 
 function displayWinnerToken(winner) {
-  // console.log(winner);
   if (!winner) {
     mainHeading.innerText = "It's a draw!";
   } else {
@@ -81,15 +82,15 @@ function resetGame() {
 
 
 function resetBoard() {
-  // button.disable//
+  gameBoard.classList.remove('disable');
   if (game.rounds % 2 === 0) {
     displayPlayerTurn(game.player1.token);
   } else if (game.rounds % 2 === 1) {
     displayPlayerTurn(game.player2.token)
   };
   game.updatePlayerTurn();//move to gamejs????
-  for (var i = 0; i < boxes.length; i++) {
-    boxes[i].innerHTML = " ";
+  for (var i = 0; i < boardBoxes.length; i++) {
+    boardBoxes[i].innerHTML = " ";
   }
   game.resetBoardValues();
 }
