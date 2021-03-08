@@ -1,18 +1,24 @@
-
+//*******************Document Queries*******************//
 var resetButton = document.getElementById('resetBtn');
 var starWins = document.getElementById('starWins');
 var heartWins = document.getElementById('heartWins');
 var gameBoard = document.getElementById('gameBoard');
-var box = document.getElementById('box0');//now use event delegation to do this
+var box = document.getElementById('box0');
 var mainHeading = document.getElementById('mainHeading');
 var boardBoxes = document.querySelectorAll('.box');
 
+
+//*******************Variable*******************//
 var game = new Game();
 
+
+//*******************Event Listeners*******************//
 window.addEventListener('load', renderLocalStorageWins);
 gameBoard.addEventListener('click', targetBoardClick)
 resetButton.addEventListener('click', resetGame);
 
+
+//*******************Functions*******************//
 function renderLocalStorageWins() {
   var player1LSWins = game.player1.retrieveWinsFromStorage(game.player1.id);
   var player2LSWins = game.player2.retrieveWinsFromStorage(game.player2.id);
@@ -25,17 +31,6 @@ function renderLocalStorageWins() {
     displayPlayerWins(game.player2, player2LSWins);
   }
 }
-
-
-//add a condtional? what if there's nothign in local storagE?
-  // displayPlayerWins(gameStored.)
-
-
-  //play retrieveWinsFromStorage
-  //can this be combined with displaywins function?
-  // display the wins for each player on the top
-// box.innerText = "Heart"
-// }
 
 
 function targetBoardClick(event) {
@@ -60,9 +55,8 @@ function targetBoardClick(event) {
     setResetTimer();
     return;
   }
-  game.updatePlayerTurn()//move to game js?//only if they clicked on an empty box
+  game.updatePlayerTurn()
   displayPlayerTurn(game.playerTurn.token);
-  // player.saveWinsToStorage();
 }
 
 
@@ -81,7 +75,6 @@ function displayWinnerToken(winner) {
 
 
 function displayPlayerWins(player, number) {
-console.log(player, number, 'line84')
   if (player === game.player1) {
     if (number === 1) {
       starWins.innerText = '1 win';
@@ -120,7 +113,7 @@ function resetBoard() {
   } else if (game.rounds % 2 === 1) {
     displayPlayerTurn(game.player2.token)
   };
-  game.updatePlayerTurn();//move to gamejs????
+  game.updatePlayerTurn();
   for (var i = 0; i < boardBoxes.length; i++) {
     boardBoxes[i].innerHTML = " ";
   }

@@ -62,7 +62,6 @@ class Game {
     return false;
   }
 
-
   updateCell(boxCell) {
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
@@ -71,7 +70,6 @@ class Game {
       }
     }
   }
-
 
   checkForWinner() {
     var player;
@@ -124,9 +122,6 @@ class Game {
       this.boxes[i].occupiedByPlayer = null;
     }
   }
-
-          //update local storage player.saveWinsToStorage(this.player.....?);
-
 
   updatePlayerTurn() {
     if (this.playerTurn === this.player1) {

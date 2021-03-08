@@ -68,27 +68,28 @@ h5 {
 }
 
 
-#box0,
-#box1,
-#box2 {
+.box0,
+.box1,
+.box2 {
   border-bottom: 8px solid navy;
 }
 
 
-#box6,
-#box7,
-#box8 {
+.box6,
+.box7,
+.box8 {
   border-top: 8px solid navy;
 }
 
 
-#box1,
-#box4,
-#box7 {
+.box1,
+.box4,
+.box7 {
   border-left: 8px solid navy;
   border-right: 8px solid navy;
 }
-.reset-btn {
+.reset-btn,
+.clear-board-btn {
   background-color: navy;
   color: white;
   font-weight: bold;
