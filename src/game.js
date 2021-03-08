@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player(1, "⭐️");
     this.player2 = new Player(2, "❤️");
     this.playerTurn = this.player1;
-    this.rounds = 0;
+    this.rounds = 0;//remove this?
     this.boxes = [
       {name: 'box0',
         occupied: false,
@@ -92,13 +92,13 @@ class Game {
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
         player.wins++;
         player.saveWinsToStorage();
-        this.addRound();
+        this.addRound();//remove this?
         return true;
       }
     }
   }
 
-  addRound() {
+  addRound() {//remove this?
     this.rounds++
   }
 
@@ -110,7 +110,7 @@ class Game {
       }
     }
     if (totalBoxes === 9) {
-      this.addRound();
+      this.addRound();//remove this?
       return true;
     }
     return false;

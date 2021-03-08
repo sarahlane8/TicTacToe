@@ -19,8 +19,8 @@ var game = new Game();
 //*******************Event Listeners*******************//
 window.addEventListener('load', renderLocalStorageWins);
 gameBoard.addEventListener('click', targetBoardClick)
-resetButton.addEventListener('click', resetGame);
-clearBoardButton.addEventListener('click', resetBoard);
+resetButton.addEventListener('click', resetGame);//change name here and in html
+clearBoardButton.addEventListener('click', clearBoard);
 
 
 //*******************Functions*******************//
@@ -103,25 +103,35 @@ function setResetTimer() {
 
 
 function resetGame() {//need to update the data model with 0 wins per player
-  // game = new Game(); do i need to keep this tp keep with the rubric?
+  game = new Game();//  do i need to keep this tp keep with the rubric?
   // resetBoard();
   //change to:
-  game.updatePlayerWins(game.player1, 0);
+  game.updatePlayerWins(game.player1, 0);//data model
   game.updatePlayerWins(game.player2, 0);
-  displayPlayerWins(game.player1, 0);
+  displayPlayerWins(game.player1, 0);//dom
   displayPlayerWins(game.player2, 0);
-  localStorage.clear();
+  displayPlayerTurn(game.player1.token);
+  clearBoard();
+  localStorage.clear();//local storage
 }
 
+function clearBoard() {
+  for (var i = 0; i < boardBoxes.length; i++) {
+    boardBoxes[i].innerHTML = " ";
+  }
+  game.resetBoardValues();
+}
 
 function resetBoard() {//update
   gameBoard.classList.remove('disable');
-  if (game.rounds % 2 === 0) {
-    displayPlayerTurn(game.player1.token);
-  } else if (game.rounds % 2 === 1) {
-    displayPlayerTurn(game.player2.token)
-  };
   game.updatePlayerTurn();
+  displayPlayerTurn(game.playerTurn.token);
+  // if (game.rounds % 2 === 0) {
+  //   displayPlayerTurn(game.player1.token);
+  // } else if (game.rounds % 2 === 1) {
+  //   displayPlayerTurn(game.player2.token)
+  // };
+  // game.updatePlayerTurn();
   for (var i = 0; i < boardBoxes.length; i++) {
     boardBoxes[i].innerHTML = " ";
   }
