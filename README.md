@@ -40,9 +40,9 @@ If a game board is filled, and there is no winner, a message will display to say
 <img width="1248" alt="draw message displayed at top of page" src="https://user-images.githubusercontent.com/70901622/110263761-dae05180-7f74-11eb-9be0-77cbf0dfdeab.png">
 </p>
 
-Each player's wins will be added to localStorage, so upon page refresh, it will retreive that information and reflect the amount of wins each player has on either the side of the page.
+Each player's wins will be added to localStorage, so upon page refresh, it will retreive that information and reflect the amount of wins each player has on either side of the page.
 
-Two buttons exists for your benefit.  First, the Clear Board button allows you to end the round you are currently playing and restart by clearing the board.  Second, the Start New Game button allows you to restart the game with 2 new players, and will clear out localStorage.
+Two buttons exists for your benefit.  First, the Clear Board button allows you to end the round you are currently playing and restart by clearing the board.  Second, the Start New Game button allows you to restart the game with 2 new players, and will clear out localStorage.  Each player's wins will turn to zero.
 
 Once you click on a cell, it cannot be undone, so choose carefully!  Similarly, your opponent cannot click on your cell after you choose it and claim it for their own.  
 
