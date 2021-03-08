@@ -11,7 +11,7 @@ class Player {
   }
 
   retrieveWinsFromStorage(playerID) {
-    var numberOfWins = localStorage.getItem(playerID);
+    var numberOfWins = JSON.parse(localStorage.getItem(playerID));
     return numberOfWins;
     // console.log(numberOfWins);
 

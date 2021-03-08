@@ -81,6 +81,7 @@ function displayWinnerToken(winner) {
 
 
 function displayPlayerWins(player, number) {
+console.log(player, number, 'line84')
   if (player === game.player1) {
     if (number === 1) {
       starWins.innerText = '1 win';
