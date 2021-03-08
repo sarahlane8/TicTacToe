@@ -61,8 +61,12 @@ function targetBoardClick(event) {
 }
 
 
-function displayGamePiece(boxCell) {
-  boxCell.innerHTML = game.playerTurn.token;
+function displayGamePiece(boxCell) {//make player turn stop so the icon at top doesn't change!
+  if (boxCell.id === "gameBoard") {
+    return;
+  } else {
+    boxCell.innerHTML = game.playerTurn.token;
+  }
 }
 
 
@@ -98,10 +102,8 @@ function setResetTimer() {
 }
 
 
-function resetGame() {//need to update the data model with 0 wins per player
-  game = new Game();//  do i need to keep this tp keep with the rubric?
-  // resetBoard();
-  //change to:
+function resetGame() {
+  game = new Game();
   game.updatePlayerWins(game.player1, 0);//data model
   game.updatePlayerWins(game.player2, 0);
   displayPlayerWins(game.player1, 0);//dom
@@ -111,6 +113,7 @@ function resetGame() {//need to update the data model with 0 wins per player
   localStorage.clear();//local storage
 }
 
+
 function clearBoard() {
   for (var i = 0; i < boardBoxes.length; i++) {
     boardBoxes[i].innerHTML = " ";
@@ -118,16 +121,11 @@ function clearBoard() {
   game.resetBoardValues();
 }
 
-function resetBoard() {//update
+
+function resetBoard() {
   gameBoard.classList.remove('disable');
   game.updatePlayerTurn();
   displayPlayerTurn(game.playerTurn.token);
-  // if (game.rounds % 2 === 0) {
-  //   displayPlayerTurn(game.player1.token);
-  // } else if (game.rounds % 2 === 1) {
-  //   displayPlayerTurn(game.player2.token)
-  // };
-  // game.updatePlayerTurn();
   for (var i = 0; i < boardBoxes.length; i++) {
     boardBoxes[i].innerHTML = " ";
   }
