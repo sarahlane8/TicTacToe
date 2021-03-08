@@ -61,6 +61,7 @@ function displayPlayerWins(player, number) {
 function checkGridClick(event) {
   var boxCell = event.target;
   if (boxCell.id === 'gameBoard') {
+    console.log('hello');
     return;
   } else {
     game.isCellOccupied(boxCell);
@@ -79,7 +80,7 @@ function displayGamePiece(boxCell) {
 
 function displayWinnerToken(winner) {
   if (!winner) {
-    mainHeading.innerText = 'It's a draw!';
+    mainHeading.innerText = 'It\'s a draw!';
   } else {
     mainHeading.innerText = `${winner} won!`;
   }
