@@ -2,7 +2,7 @@
 //change the name of start new game button
 
 //*******************Document Queries*******************//
-var resetButton = document.getElementById('resetBtn');
+var startNewGameButton = document.getElementById('startNewGameBtn');
 var clearBoardButton = document.getElementById('clearBoardBtn');
 var starWins = document.getElementById('starWins');
 var heartWins = document.getElementById('heartWins');
@@ -18,7 +18,7 @@ var game = new Game();
 //*******************Event Listeners*******************//
 window.addEventListener('load', renderLocalStorageWins);
 gameBoard.addEventListener('click', targetBoardClick)
-resetButton.addEventListener('click', resetGame);//change name here and in html
+startNewGameButton.addEventListener('click', resetGame);
 clearBoardButton.addEventListener('click', clearBoard);
 
 
