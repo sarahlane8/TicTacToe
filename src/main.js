@@ -1,5 +1,6 @@
 //*******************Document Queries*******************//
 var resetButton = document.getElementById('resetBtn');
+var clearBoardButton = document.getElementById('clearBoardBtn');
 var starWins = document.getElementById('starWins');
 var heartWins = document.getElementById('heartWins');
 var gameBoard = document.getElementById('gameBoard');
@@ -16,6 +17,7 @@ var game = new Game();
 window.addEventListener('load', renderLocalStorageWins);
 gameBoard.addEventListener('click', targetBoardClick)
 resetButton.addEventListener('click', resetGame);
+clearBoardButton.addEventListener('click', resetBoard);
 
 
 //*******************Functions*******************//
