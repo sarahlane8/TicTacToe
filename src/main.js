@@ -34,8 +34,12 @@ function renderLocalStorageWins() {
 }
 
 
+
+
 function targetBoardClick(event) {
   var boxCell = event.target;
+  console.log(boxCell);
+
   var isCellTaken = game.isCellOccupied(boxCell);
   if (isCellTaken) {
     return;
@@ -56,12 +60,16 @@ function targetBoardClick(event) {
     setResetTimer();
     return;
   }
+  if (boxCell.id === "gameBoard") {//too much code, refactor!
+    return;
+  } else {
   game.updatePlayerTurn()
   displayPlayerTurn(game.playerTurn.token);
+  }
 }
 
 
-function displayGamePiece(boxCell) {//make player turn stop so the icon at top doesn't change!
+function displayGamePiece(boxCell) {
   if (boxCell.id === "gameBoard") {
     return;
   } else {
