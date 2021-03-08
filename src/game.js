@@ -91,14 +91,9 @@ class Game {
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
         player.wins++;
         player.saveWinsToStorage();
-        this.addRound();//remove this?
         return true;
       }
     }
-  }
-
-  addRound() {//remove this?
-    this.rounds++
   }
 
   checkForDraw() {
@@ -109,7 +104,6 @@ class Game {
       }
     }
     if (totalBoxes === 9) {
-      this.addRound();//remove this?
       return true;
     }
     return false;

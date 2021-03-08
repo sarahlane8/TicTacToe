@@ -1,25 +1,22 @@
-//when i start a new game, it always starts with the star icon
-//change the name of start new game button
-
 //*******************Document Queries*******************//
-var startNewGameButton = document.getElementById('startNewGameBtn');
-var clearBoardButton = document.getElementById('clearBoardBtn');
-var starWins = document.getElementById('starWins');
-var heartWins = document.getElementById('heartWins');
-var gameBoard = document.getElementById('gameBoard');
-var mainHeading = document.getElementById('mainHeading');
 var boardBoxes = document.querySelectorAll('.box');
+var clearBoardButton = document.getElementById('clearBoardBtn');
+var gameBoard = document.getElementById('gameBoard');
+var heartWins = document.getElementById('heartWins');
+var mainHeading = document.getElementById('mainHeading');
+var startNewGameButton = document.getElementById('startNewGameBtn');
+var starWins = document.getElementById('starWins');
 
 
-//*******************Variable*******************//
+//*******************Global Variable*******************//
 var game = new Game();
 
 
 //*******************Event Listeners*******************//
 window.addEventListener('load', renderLocalStorageWins);
+clearBoardButton.addEventListener('click', clearBoard);
 gameBoard.addEventListener('click', targetBoardClick)
 startNewGameButton.addEventListener('click', resetGame);
-clearBoardButton.addEventListener('click', clearBoard);
 
 
 //*******************Functions*******************//
