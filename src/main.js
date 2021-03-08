@@ -15,7 +15,7 @@ var game = new Game();
 //*******************Event Listeners*******************//
 window.addEventListener('load', renderLocalStorageWins);
 clearBoardButton.addEventListener('click', clearBoard);
-gameBoard.addEventListener('click', targetBoardClick)
+gameBoard.addEventListener('click', checkGridClick)
 startNewGameButton.addEventListener('click', resetGame);
 
 
@@ -33,40 +33,104 @@ function renderLocalStorageWins() {
   }
 }
 
-
-
-
-function targetBoardClick(event) {
+function checkGridClick(event) {
   var boxCell = event.target;
-  console.log(boxCell);
-
-  var isCellTaken = game.isCellOccupied(boxCell);
-  if (isCellTaken) {
-    return;
-  }
-  game.updateCell(boxCell);
-  displayGamePiece(boxCell)
-  var isWinner = game.checkForWinner();
-  if (isWinner) {
-    gameBoard.classList.add('disable');
-    displayWinnerToken(game.playerTurn.token);
-    displayPlayerWins(game.playerTurn, game.playerTurn.wins)
-    setResetTimer();
-    return;
-  }
-  var isDraw = game.checkForDraw();
-  if (isDraw) {
-    displayWinnerToken();
-    setResetTimer();
-    return;
-  }
-  if (boxCell.id === "gameBoard") {//too much code, refactor!
+  if (boxCell.id === "gameBoard") {
     return;
   } else {
-  game.updatePlayerTurn()
-  displayPlayerTurn(game.playerTurn.token);
+    game.isCellOccupied(boxCell);
   }
 }
+
+
+
+// function updateBoxCell(boxCell) {
+//   var isCellTaken = game.isCellOccupied(boxCell);
+//   if (isCellTaken) {
+//     return;
+// } else {
+//   game.updateCell(boxCell);
+//   displayGamePiece(boxCell)
+// }
+
+
+
+function changeClickability(command) {
+  if (command === 'enable') {
+    gameBoard.classList.remove('disable');
+  } else if (command === 'disable') {
+    gameBoard.classList.add('disable');
+  }
+}
+
+
+// game.updatePlayerTurn()
+// displayPlayerTurn(game.playerTurn.token);
+// }
+//
+//
+//   var isWinner = game.checkForWinner();//make each if statement a different function
+//   if (isWinner) {
+//     changeClickability(disable);
+//     displayWinnerToken(game.playerTurn.token);
+//     displayPlayerWins(game.playerTurn, game.playerTurn.wins)
+//     setResetTimer();
+//     return;
+//   }
+//   var isDraw = game.checkForDraw();
+//   if (isDraw) {
+//     displayWinnerToken();
+//     setResetTimer();
+//     return;
+//   }
+//   if (!checkGridClick()) {
+//   game.updatePlayerTurn()
+//   displayPlayerTurn(game.playerTurn.token);
+//   }
+// }
+
+
+//check if the grid was a cell
+//if yes, check if its occupied (if not do nothing)
+//if not occupied, update the cell with that token (DM and dom)
+//then check for a winner
+//if yes udpate dom and dM
+//if not, check for a draw
+//if yes, clear the board on dom and DM
+//if not, just change the turns on dm and dom
+
+
+
+//
+// function targetBoardClick(event) {
+//   var boxCell = event.target;
+//   var isCellTaken = game.isCellOccupied(boxCell);
+//   if (isCellTaken) {
+//     return;
+//   }
+//   game.updateCell(boxCell);
+//   displayGamePiece(boxCell)
+//   var isWinner = game.checkForWinner();
+//   if (isWinner) {
+//     gameBoard.classList.add('disable');
+//     displayWinnerToken(game.playerTurn.token);
+//     displayPlayerWins(game.playerTurn, game.playerTurn.wins)
+//     setResetTimer();
+//     return;
+//   }
+//   var isDraw = game.checkForDraw();
+//   if (isDraw) {
+//     displayWinnerToken();
+//     setResetTimer();
+//     return;
+//   }
+//   game.updatePlayerTurn()
+//   displayPlayerTurn(game.playerTurn.token);
+// }
+
+
+
+
 
 
 function displayGamePiece(boxCell) {
@@ -131,13 +195,10 @@ function clearBoard() {
 
 
 function resetBoard() {
-  gameBoard.classList.remove('disable');
+  changeClickability('enable');
   game.updatePlayerTurn();
   displayPlayerTurn(game.playerTurn.token);
-  for (var i = 0; i < boardBoxes.length; i++) {
-    boardBoxes[i].innerHTML = " ";
-  }
-  game.resetBoardValues();
+  clearBoard();
 }
 
 

@@ -53,21 +53,22 @@ class Game {
   }
 
   isCellOccupied(boxCell) {
+    var index;//use this to take to next method so dont have to duplicate for loop
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied) {
-        return true;
+        return;
+      } else if (this.boxes[i].name === boxCell.id) {//are these in the right spot below?
+        index = i;
+        displayGamePiece(boxCell);//DOM
+        this.updateCell(i);//DM
       }
     }
-    return false;
   }
 
-  updateCell(boxCell) {
-    for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
-        this.boxes[i].occupied = true;
-        this.boxes[i].occupiedByPlayer = this.playerTurn;
-      }
-    }
+  updateCell(i) {
+    this.boxes[i].occupied = true;
+    this.boxes[i].occupiedByPlayer = this.playerTurn;
+    this.checkForWinner();
   }
 
   checkForWinner() {
@@ -90,13 +91,18 @@ class Game {
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
         player.wins++;
-        player.saveWinsToStorage();
-        return true;
+        player.saveWinsToStorage();//local storage
+        displayWinnerToken(player.token)//DOM
+        displayPlayerWins(player, player.wins)//DOM
+        changeClickability('disable');
+        setResetTimer();
+        return;
       }
     }
-  }
+    this.checkForDraw();
+}
 
-  checkForDraw() {
+  checkForDraw() {// add this as a property of game so that its easier to check and you dont need another for loop?
     var totalBoxes = 0;
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].occupied) {
@@ -104,9 +110,14 @@ class Game {
       }
     }
     if (totalBoxes === 9) {
-      return true;
+      displayWinnerToken();
+      setResetTimer();
+      // return;
+    } else {
+      console.log('line 118')//is this the right place?
+      game.updatePlayerTurn()
+      displayPlayerTurn(game.playerTurn.token);
     }
-    return false;
   }
 
   resetBoardValues() {
@@ -128,3 +139,83 @@ class Game {
     player.wins = wins;
   }
 }
+
+
+
+//
+// isCellOccupied(boxCell) {
+//   for (var i = 0; i < this.boxes.length; i++) {
+//     if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+//
+// updateCell(boxCell) {
+//   for (var i = 0; i < this.boxes.length; i++) {
+//     if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
+//       this.boxes[i].occupied = true;
+//       this.boxes[i].occupiedByPlayer = this.playerTurn;
+//     }
+//   }
+// }
+//
+// checkForWinner() {
+//   var player;
+//   if (this.playerTurn === this.player1) {
+//     player = this.player1;
+//   } else {
+//     player = this.player2;
+//   }
+//   var boxesOccupiedArray = [];
+//   var winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+//   for (var i = 0; i < this.boxes.length; i++) {
+//     if (this.boxes[i].occupiedByPlayer === player) {
+//       boxesOccupiedArray.push(i);
+//     }
+//   }
+//   for (var i = 0; i < winningCombos.length; i++) {
+//     var a = winningCombos[i][0];
+//     var b = winningCombos[i][1];
+//     var c = winningCombos[i][2];
+//     if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
+//       player.wins++;
+//       player.saveWinsToStorage();
+//       return true;
+//     }
+//   }
+// }
+//
+// checkForDraw() {
+//   var totalBoxes = 0;
+//   for (var i = 0; i < this.boxes.length; i++) {
+//     if (this.boxes[i].occupied) {
+//       totalBoxes++;
+//     }
+//   }
+//   if (totalBoxes === 9) {
+//     return true;
+//   }
+//   return false;
+// }
+//
+// resetBoardValues() {
+//   for (var i = 0; i < this.boxes.length; i++) {
+//     this.boxes[i].occupied = false
+//     this.boxes[i].occupiedByPlayer = null;
+//   }
+// }
+//
+// updatePlayerTurn() {
+//   if (this.playerTurn === this.player1) {
+//     this.playerTurn = this.player2;
+//   } else {
+//     this.playerTurn = this.player1;
+//   }
+// }
+//
+// updatePlayerWins(player, wins) {
+//   player.wins = wins;
+// }
+// }
