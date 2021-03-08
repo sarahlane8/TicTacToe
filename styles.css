@@ -4,14 +4,14 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   display: flex;
-  font-family: sans-serif
   color: navy;
   margin: 0;
   padding: 0;
 }
 
 h3,
-h4 {
+h4,
+h5 {
 font-size: 80px;
 margin: 0;
 color: navy;
@@ -19,8 +19,8 @@ color: navy;
 
 
 h5 {
-  color: navy;
-  margin-top: 30px;
+  margin: 50px 0px;
+  font-size: larger;
 }
 
 
@@ -54,9 +54,11 @@ h5 {
   align-items: center;
 }
 
+
 .disable {
   pointer-events: none;
 }
+
 
 .box {
   box-sizing: border-box;
@@ -65,6 +67,7 @@ h5 {
   width: 175px;
   justify-content: center;
   align-items: center;
+  font-size: 90px;
 }
 
 
@@ -88,14 +91,21 @@ h5 {
   border-left: 8px solid navy;
   border-right: 8px solid navy;
 }
-.reset-btn,
-.clear-board-btn {
+
+
+button {
   background-color: navy;
   color: white;
   font-weight: bold;
   font-size: x-large;
   font-family: sans-serif;
   border-radius: 6px;
-  padding: 10px;
+  padding: 20px;
   margin-top: 60px;
+  transition-duration: 0.2s;
+}
+
+
+button:hover {
+  background-color: purple;
 }

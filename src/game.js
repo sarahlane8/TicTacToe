@@ -4,7 +4,7 @@ class Game {
     this.player1 = new Player(1, "⭐️");
     this.player2 = new Player(2, "❤️");
     this.playerTurn = this.player1;
-    this.rounds = 0;
+    this.boxesOccupied = 0;
     this.boxes = [
       {name: 'box0',
         occupied: false,
@@ -54,21 +54,23 @@ class Game {
   }
 
   isCellOccupied(boxCell) {
+    var index;
     for (var i = 0; i < this.boxes.length; i++) {
       if (this.boxes[i].name === boxCell.id && this.boxes[i].occupied) {
-        return true;
+        return;
+      } else if (this.boxes[i].name === boxCell.id) {
+        index = i;
+        this.boxesOccupied++;
+        displayGamePiece(boxCell);
+        this.updateCell(i);
       }
     }
-    return false;
   }
 
-  updateCell(boxCell) {
-    for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].name === boxCell.id && !this.boxes[i].occupied) {
-        this.boxes[i].occupied = true;
-        this.boxes[i].occupiedByPlayer = this.playerTurn;
-      }
-    }
+  updateCell(i) {
+    this.boxes[i].occupied = true;
+    this.boxes[i].occupiedByPlayer = this.playerTurn;
+    this.checkForWinner();
   }
 
   checkForWinner() {
@@ -90,36 +92,34 @@ class Game {
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
+        //make this a winner function? or leave it here?
         player.wins++;
         player.saveWinsToStorage();
-        this.addRound();
-        return true;
+        displayWinnerToken(player.token);
+        displayPlayerWins(player, player.wins);
+        changeClickability('disable');
+        setResetTimer();
+        return;
       }
     }
-  }
-
-  addRound() {
-    this.rounds++
-  }
+    this.checkForDraw();
+}
 
   checkForDraw() {
-    var totalBoxes = 0;
-    for (var i = 0; i < this.boxes.length; i++) {
-      if (this.boxes[i].occupied) {
-        totalBoxes++;
-      }
+    if (this.boxesOccupied === 9) {
+      displayWinnerToken();
+      setResetTimer();
+    } else {
+      game.updatePlayerTurn()
+      displayPlayerTurn(game.playerTurn.token);
     }
-    if (totalBoxes === 9) {
-      this.addRound();
-      return true;
-    }
-    return false;
   }
 
   resetBoardValues() {
     for (var i = 0; i < this.boxes.length; i++) {
-      this.boxes[i].occupied = false
+      this.boxes[i].occupied = false;
       this.boxes[i].occupiedByPlayer = null;
+      this.boxesOccupied = 0;
     }
   }
 

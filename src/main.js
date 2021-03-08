@@ -1,23 +1,22 @@
 //*******************Document Queries*******************//
-var resetButton = document.getElementById('resetBtn');
-var clearBoardButton = document.getElementById('clearBoardBtn');
-var starWins = document.getElementById('starWins');
-var heartWins = document.getElementById('heartWins');
-var gameBoard = document.getElementById('gameBoard');
-var box = document.getElementById('box0');
-var mainHeading = document.getElementById('mainHeading');
 var boardBoxes = document.querySelectorAll('.box');
+var clearBoardButton = document.getElementById('clearBoardBtn');
+var gameBoard = document.getElementById('gameBoard');
+var heartWins = document.getElementById('heartWins');
+var mainHeading = document.getElementById('mainHeading');
+var startNewGameButton = document.getElementById('startNewGameBtn');
+var starWins = document.getElementById('starWins');
 
 
-//*******************Variable*******************//
+//*******************Global Variable*******************//
 var game = new Game();
 
 
 //*******************Event Listeners*******************//
 window.addEventListener('load', renderLocalStorageWins);
-gameBoard.addEventListener('click', targetBoardClick)
-resetButton.addEventListener('click', resetGame);
-clearBoardButton.addEventListener('click', resetBoard);
+clearBoardButton.addEventListener('click', clearBoard);
+gameBoard.addEventListener('click', checkGridClick)
+startNewGameButton.addEventListener('click', startNewGame);
 
 
 //*******************Functions*******************//
@@ -32,46 +31,11 @@ function renderLocalStorageWins() {
     game.updatePlayerWins(game.player2, player2LSWins)
     displayPlayerWins(game.player2, player2LSWins);
   }
-}
-
-
-function targetBoardClick(event) {
-  var boxCell = event.target;
-  var isCellTaken = game.isCellOccupied(boxCell);
-  if (isCellTaken) {
-    return;
+  if (!player1LSWins) {
+    displayPlayerWins(game.player1, 0)
   }
-  game.updateCell(boxCell);
-  displayGamePiece(boxCell)
-  var isWinner = game.checkForWinner();
-  if (isWinner) {
-    gameBoard.classList.add('disable');
-    displayWinnerToken(game.playerTurn.token);
-    displayPlayerWins(game.playerTurn, game.playerTurn.wins)
-    setResetTimer();
-    return;
-  }
-  var isDraw = game.checkForDraw();
-  if (isDraw) {
-    displayWinnerToken();
-    setResetTimer();
-    return;
-  }
-  game.updatePlayerTurn()
-  displayPlayerTurn(game.playerTurn.token);
-}
-
-
-function displayGamePiece(boxCell) {
-  boxCell.innerHTML = game.playerTurn.token;
-}
-
-
-function displayWinnerToken(winner) {
-  if (!winner) {
-    mainHeading.innerText = "It's a draw!";
-  } else {
-    mainHeading.innerText = `${winner} won!`;
+  if (!player2LSWins) {
+    displayPlayerWins(game.player2, 0)
   }
 }
 
@@ -94,28 +58,65 @@ function displayPlayerWins(player, number) {
 }
 
 
+function checkGridClick(event) {
+  var boxCell = event.target;
+  if (boxCell.id === "gameBoard") {
+    return;
+  } else {
+    game.isCellOccupied(boxCell);
+  }
+}
+
+
+function displayGamePiece(boxCell) {
+  if (boxCell.id === "gameBoard") {
+    return;
+  } else {
+    boxCell.innerHTML = game.playerTurn.token;
+  }
+}
+
+
+function displayWinnerToken(winner) {
+  if (!winner) {
+    mainHeading.innerText = "It's a draw!";
+  } else {
+    mainHeading.innerText = `${winner} won!`;
+  }
+}
+
+
+function displayPlayerTurn(player) {
+  mainHeading.innerText = `It's ${player}'s turn!`;
+}
+
+
 function setResetTimer() {
   setTimeout(function(){resetBoard()}, 2000);
 }
 
 
-function resetGame() {
+function startNewGame() {
   game = new Game();
-  resetBoard();
-  displayPlayerWins(game.player1, 0);
-  displayPlayerWins(game.player2, 0);
+  game.updatePlayerWins(game.player1, 0);
+  game.updatePlayerWins(game.player2, 0);
+  displayPlayerTurn(game.player1.token);
+  clearBoard();
   localStorage.clear();
+  renderLocalStorageWins();
 }
 
 
-function resetBoard() {
-  gameBoard.classList.remove('disable');
-  if (game.rounds % 2 === 0) {
-    displayPlayerTurn(game.player1.token);
-  } else if (game.rounds % 2 === 1) {
-    displayPlayerTurn(game.player2.token)
-  };
-  game.updatePlayerTurn();
+function changeClickability(command) {
+  if (command === 'enable') {
+    gameBoard.classList.remove('disable');
+  } else if (command === 'disable') {
+    gameBoard.classList.add('disable');
+  }
+}
+
+
+function clearBoard() {
   for (var i = 0; i < boardBoxes.length; i++) {
     boardBoxes[i].innerHTML = " ";
   }
@@ -123,6 +124,9 @@ function resetBoard() {
 }
 
 
-function displayPlayerTurn(player) {
-  mainHeading.innerText = `It's ${player}'s turn!`;
+function resetBoard() {
+  changeClickability('enable');
+  game.updatePlayerTurn();
+  displayPlayerTurn(game.playerTurn.token);
+  clearBoard();
 }
