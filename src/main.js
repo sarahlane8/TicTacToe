@@ -7,7 +7,7 @@ var clearBoardButton = document.getElementById('clearBoardBtn');
 var starWins = document.getElementById('starWins');
 var heartWins = document.getElementById('heartWins');
 var gameBoard = document.getElementById('gameBoard');
-var box = document.getElementById('box0');
+// var box = document.getElementById('box0');
 var mainHeading = document.getElementById('mainHeading');
 var boardBoxes = document.querySelectorAll('.box');
 

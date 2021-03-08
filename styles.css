@@ -89,14 +89,20 @@ h5 {
   border-left: 8px solid navy;
   border-right: 8px solid navy;
 }
-.reset-btn,
-.clear-board-btn {
+
+
+button {
   background-color: navy;
   color: white;
   font-weight: bold;
   font-size: x-large;
   font-family: sans-serif;
   border-radius: 6px;
-  padding: 10px;
+  padding: 20px;
   margin-top: 60px;
+  transition-duration: 0.2s;
+}
+
+button:hover {
+  background-color: purple;
 }
