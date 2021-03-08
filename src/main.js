@@ -1,3 +1,6 @@
+//when i start a new game, it always starts with the star icon
+//change the name of start new game button
+
 //*******************Document Queries*******************//
 var resetButton = document.getElementById('resetBtn');
 var clearBoardButton = document.getElementById('clearBoardBtn');
@@ -99,16 +102,19 @@ function setResetTimer() {
 }
 
 
-function resetGame() {
-  game = new Game();
-  resetBoard();
+function resetGame() {//need to update the data model with 0 wins per player
+  // game = new Game(); do i need to keep this tp keep with the rubric?
+  // resetBoard();
+  //change to:
+  game.updatePlayerWins(game.player1, 0);
+  game.updatePlayerWins(game.player2, 0);
   displayPlayerWins(game.player1, 0);
   displayPlayerWins(game.player2, 0);
   localStorage.clear();
 }
 
 
-function resetBoard() {
+function resetBoard() {//update
   gameBoard.classList.remove('disable');
   if (game.rounds % 2 === 0) {
     displayPlayerTurn(game.player1.token);
