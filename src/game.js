@@ -4,7 +4,6 @@ class Game {
     this.player1 = new Player(1, "⭐️");
     this.player2 = new Player(2, "❤️");
     this.playerTurn = this.player1;
-    this.rounds = 0;//remove this?
     this.boxes = [
       {name: 'box0',
         occupied: false,
