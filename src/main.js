@@ -60,7 +60,7 @@ function displayPlayerWins(player, number) {
 
 function checkGridClick(event) {
   var boxCell = event.target;
-  if (boxCell.id === "gameBoard") {
+  if (boxCell.id === 'gameBoard') {
     return;
   } else {
     game.isCellOccupied(boxCell);
@@ -69,7 +69,7 @@ function checkGridClick(event) {
 
 
 function displayGamePiece(boxCell) {
-  if (boxCell.id === "gameBoard") {
+  if (boxCell.id === 'gameBoard') {
     return;
   } else {
     boxCell.innerHTML = game.playerTurn.token;
@@ -79,7 +79,7 @@ function displayGamePiece(boxCell) {
 
 function displayWinnerToken(winner) {
   if (!winner) {
-    mainHeading.innerText = "It's a draw!";
+    mainHeading.innerText = 'It's a draw!';
   } else {
     mainHeading.innerText = `${winner} won!`;
   }
@@ -118,7 +118,7 @@ function changeClickability(command) {
 
 function clearBoard() {
   for (var i = 0; i < boardBoxes.length; i++) {
-    boardBoxes[i].innerHTML = " ";
+    boardBoxes[i].innerHTML = ' ';
   }
   game.resetBoardValues();
 }

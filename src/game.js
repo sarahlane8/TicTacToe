@@ -1,8 +1,8 @@
 
 class Game {
   constructor() {
-    this.player1 = new Player(1, "⭐️");
-    this.player2 = new Player(2, "❤️");
+    this.player1 = new Player(1, '⭐️');
+    this.player2 = new Player(2, '❤️');
     this.playerTurn = this.player1;
     this.boxesOccupied = 0;
     this.boxes = [
@@ -74,12 +74,7 @@ class Game {
   }
 
   checkForWinner() {
-    var player;
-    if (this.playerTurn === this.player1) {
-      player = this.player1;
-    } else {
-      player = this.player2;
-    }
+    var player = this.playerTurn;
     var boxesOccupiedArray = [];
     var winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     for (var i = 0; i < this.boxes.length; i++) {
@@ -92,7 +87,6 @@ class Game {
       var b = winningCombos[i][1];
       var c = winningCombos[i][2];
       if (boxesOccupiedArray.includes(a) && boxesOccupiedArray.includes(b) && boxesOccupiedArray.includes(c)) {
-        //make this a winner function? or leave it here?
         player.wins++;
         player.saveWinsToStorage();
         displayWinnerToken(player.token);
