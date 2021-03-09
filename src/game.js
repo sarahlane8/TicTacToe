@@ -91,13 +91,13 @@ class Game {
         player.saveWinsToStorage();
         displayWinnerToken(player.token);
         displayPlayerWins(player, player.wins);
-        changeClickability('disable');
+        gameBoard.classList.add('disable');
         setResetTimer();
         return;
       }
     }
     this.checkForDraw();
-}
+  }
 
   checkForDraw() {
     if (this.boxesOccupied === 9) {
