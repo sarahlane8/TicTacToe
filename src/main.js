@@ -93,7 +93,8 @@ function startNewGame() {
   displayPlayerTurn(game.player1.token);
   clearBoard();
   localStorage.clear();
-  renderLocalStorageWins();
+  displayPlayerWins(game.player1, 0);
+  displayPlayerWins(game.player2, 0);
 }
 
 
