@@ -15,7 +15,7 @@ var game = new Game();
 //*******************Event Listeners*******************//
 window.addEventListener('load', renderLocalStorageWins);
 clearBoardButton.addEventListener('click', clearBoard);
-gameBoard.addEventListener('click', checkGridClick)
+gameBoard.addEventListener('click', checkGridClick);
 startNewGameButton.addEventListener('click', startNewGame);
 
 
@@ -24,18 +24,12 @@ function renderLocalStorageWins() {
   var player1LSWins = game.player1.retrieveWinsFromStorage(game.player1.id);
   var player2LSWins = game.player2.retrieveWinsFromStorage(game.player2.id);
   if (player1LSWins) {
-    game.updatePlayerWins(game.player1, player1LSWins)
+    game.updatePlayerWins(game.player1, player1LSWins);
     displayPlayerWins(game.player1, player1LSWins);
   }
   if (player2LSWins) {
-    game.updatePlayerWins(game.player2, player2LSWins)
+    game.updatePlayerWins(game.player2, player2LSWins);
     displayPlayerWins(game.player2, player2LSWins);
-  }
-  if (!player1LSWins) {
-    displayPlayerWins(game.player1, 0)
-  }
-  if (!player2LSWins) {
-    displayPlayerWins(game.player2, 0)
   }
 }
 
@@ -60,18 +54,14 @@ function displayPlayerWins(player, number) {
 
 function checkGridClick(event) {
   var boxCell = event.target;
-  if (boxCell.id === "gameBoard") {
-    return;
-  } else {
+  if (boxCell.id !== 'gameBoard') {
     game.isCellOccupied(boxCell);
   }
 }
 
 
 function displayGamePiece(boxCell) {
-  if (boxCell.id === "gameBoard") {
-    return;
-  } else {
+  if (boxCell.id !== 'gameBoard') {
     boxCell.innerHTML = game.playerTurn.token;
   }
 }
@@ -79,7 +69,7 @@ function displayGamePiece(boxCell) {
 
 function displayWinnerToken(winner) {
   if (!winner) {
-    mainHeading.innerText = "It's a draw!";
+    mainHeading.innerText = 'It\'s a draw!';
   } else {
     mainHeading.innerText = `${winner} won!`;
   }
@@ -107,25 +97,16 @@ function startNewGame() {
 }
 
 
-function changeClickability(command) {
-  if (command === 'enable') {
-    gameBoard.classList.remove('disable');
-  } else if (command === 'disable') {
-    gameBoard.classList.add('disable');
-  }
-}
-
-
 function clearBoard() {
   for (var i = 0; i < boardBoxes.length; i++) {
-    boardBoxes[i].innerHTML = " ";
+    boardBoxes[i].innerHTML = ' ';
   }
   game.resetBoardValues();
 }
 
 
 function resetBoard() {
-  changeClickability('enable');
+  gameBoard.classList.remove('disable');
   game.updatePlayerTurn();
   displayPlayerTurn(game.playerTurn.token);
   clearBoard();
