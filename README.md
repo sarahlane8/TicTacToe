@@ -1,4 +1,4 @@
-<iframe src="https://drive.google.com/file/d/1mrDfBE3pcDKCcOIj0-KrGozT63ixdpB7/preview" width="640" height="480"></iframe>
+<a href="https://drive.google.com/file/d/1mrDfBE3pcDKCcOIj0-KrGozT63ixdpB7/preview" width="640" height="480"></a>
 
 # Tic-Tac-Toe
 
